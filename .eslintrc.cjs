@@ -31,6 +31,8 @@ module.exports = {
       version: "detect",
     },
   },
-  ignorePatterns: ["src/index.css"],
-  rules: {},
+  ignorePatterns: ["src/**/*.css"],
+  rules: {
+    "react/react-in-jsx-scope": "off",
+  },
 };
