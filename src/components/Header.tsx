@@ -3,11 +3,7 @@ import { CgClose, CgMenu } from "react-icons/cg";
 import { FiShoppingCart } from "react-icons/fi";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
-
-type MenuItem = {
-  to: string;
-  label: string | JSX.Element;
-};
+import { MenuItem } from "../utils/types";
 
 const Header: React.FC = () => {
   const [click, setClick] = useState(true);
