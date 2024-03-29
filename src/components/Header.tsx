@@ -67,32 +67,31 @@ const Header: React.FC = () => {
               />
             )}
           </div>
-          <div>
-            {click && (
-              <div className="md:hidden lg:hidden block fixed w-full h-[100dvh] mt-6 left-0 right-0 bg-slate-900 transition">
-                <ul className="text-xl py-12 px-20 flex-col text-white text-center">
-                  {menuItems.map((menuItem) => (
-                    <Link
-                      to={menuItem.to}
-                      key={menuItem.to}
-                      onClick={handleMenuClick}
+
+          {click && (
+            <div className="md:hidden lg:hidden block fixed w-full h-[100dvh] mt-6 left-0 right-0 bg-slate-900 transition">
+              <ul className="text-xl py-12 px-20 flex-col text-white text-center">
+                {menuItems.map((menuItem) => (
+                  <Link
+                    to={menuItem.to}
+                    key={menuItem.to}
+                    onClick={handleMenuClick}
+                  >
+                    <li
+                      className={`cursor-pointer my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded ${
+                        typeof menuItem.label === "object" &&
+                        menuItem.label.type === FiShoppingCart
+                          ? "flex justify-center"
+                          : ""
+                      }`}
                     >
-                      <li
-                        className={`cursor-pointer my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded ${
-                          typeof menuItem.label === "object" &&
-                          menuItem.label.type === FiShoppingCart
-                            ? "flex justify-center"
-                            : ""
-                        }`}
-                      >
-                        {menuItem.label}
-                      </li>
-                    </Link>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+                      {menuItem.label}
+                    </li>
+                  </Link>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
