@@ -1,4 +1,5 @@
 import { BannerImageSection } from "./Component/BannerImageSection";
+import Services from "./Component/Services/Services";
 import MySwiper from "./Component/Swiper/Swiper";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       <BannerImageSection />
       <MySwiper />
+      <Services />
     </div>
   );
 };
