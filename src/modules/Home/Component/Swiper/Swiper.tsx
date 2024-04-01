@@ -44,7 +44,7 @@ const swiperOptions: SwiperOptions = {
 
 const MySwiper = () => {
   return (
-    <div className="relative mb-20 flex flex-col gap-5 w-[90%] mx-auto my-10 py-10 -z-10">
+    <div className="relative my-10 md:mb-20 flex flex-col gap-5 w-[90%] mx-auto -z-10">
       <div className=" relative">
         <div className="text-[#5138ee] pb-0 text-xl">Check Now!</div>
         <div className="text-4xl md:text-3xl lg:text-4xl pt-0 font-bold">
