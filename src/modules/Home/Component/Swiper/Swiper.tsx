@@ -52,6 +52,7 @@ const MySwiper = () => {
       <div className="h-auto flex items-center justify-center">
         <Swiper
           spaceBetween={30}
+          loop={true}
           {...swiperOptions}
           centeredSlides={false}
           autoplay={{
