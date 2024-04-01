@@ -3,11 +3,11 @@ import "./bannerimage.css";
 
 export const BannerImageSection = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-16 justify-items-center relative -z-10">
+    <div className="grid mt-10 grid-cols-1 md:grid-cols-2 gap-5 justify-items-center relative -z-10 w-[90%] mx-auto">
       <div className="flex flex-col gap-5 justify-center md:px-10  md:text-left">
         <h3 className="text-[#5138ee] text-xl">WELCOME TO</h3>
         <h1 className="text-4xl font-bold">Sales More</h1>
-        <p className="text-base w-[80%]">
+        <p className="text-base w-[90%]">
           It wasn&lsquot quite yet time to panic. There was still time to
           salvage the situation. At least that is what she was telling himself.
           The reality was that it was time to panic and there wasn &lsquot time
