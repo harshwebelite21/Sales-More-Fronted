@@ -44,12 +44,14 @@ const swiperOptions: SwiperOptions = {
 
 const MySwiper = () => {
   return (
-    <div className="mb-20 flex flex-col gap-5">
-      <div className="px-10">
+    <div className="relative mb-20 flex flex-col gap-5 w-[90%] mx-auto my-10 py-10 -z-10">
+      <div className=" relative">
         <div className="text-[#5138ee] pb-0 text-xl">Check Now!</div>
-        <div className="text-4xl pt-0  font-bold">Our Feature Services</div>
+        <div className="text-4xl md:text-3xl lg:text-4xl pt-0 font-bold">
+          Our Feature Services
+        </div>
       </div>
-      <div className="h-auto flex items-center justify-center">
+      <div className="relative h-auto flex items-center justify-center">
         <Swiper
           spaceBetween={30}
           loop={true}
@@ -68,7 +70,7 @@ const MySwiper = () => {
         >
           {products.map((product) => (
             <SwiperSlide key={product.id}>
-              <div className="m-10 mt-0">
+              <div className=" relative">
                 <img
                   src={product.imageUrl}
                   alt={product.name}
