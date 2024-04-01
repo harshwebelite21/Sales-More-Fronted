@@ -1,4 +1,4 @@
-import BannerImage from "../../../images/bannerImage.png";
+import BannerImage from "../../../../images/bannerImage.png";
 export const BannerImageSection = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-10 w-[90%] mx-auto my-10 lg:py-10">
