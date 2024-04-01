@@ -53,7 +53,7 @@ const MySwiper = () => {
       </div>
       <div className="relative h-auto flex items-center justify-center">
         <Swiper
-          spaceBetween={30}
+          spaceBetween={20}
           loop={true}
           {...swiperOptions}
           centeredSlides={false}
@@ -74,7 +74,7 @@ const MySwiper = () => {
                 <img
                   src={product.imageUrl}
                   alt={product.name}
-                  className="w-full h-auto rounded"
+                  className="w-full h-auto rounded-[20px]"
                 />
               </div>
             </SwiperSlide>
