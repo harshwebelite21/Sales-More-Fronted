@@ -1,7 +1,11 @@
-import React from "react";
+import { BannerImageSection } from "./Component/BannerImageSection";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <BannerImageSection />
+    </div>
+  );
 };
 
 export default Home;
