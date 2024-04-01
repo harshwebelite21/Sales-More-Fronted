@@ -14,6 +14,7 @@ const Services = () => {
           <h3 className="p-5">Super Fast and Free Delivery</h3>
         </div>
       </div>
+
       <div className="w-full h-full ">
         <div className="bg-[#f6f8fa] rounded flex flex-col items-center p-3">
           <div className="bg-[#ffffff] rounded-full flex  p-3">
@@ -31,6 +32,7 @@ const Services = () => {
           <h3 className="p-5">Money-back Guaranteed</h3>
         </div>
       </div>
+
       <div className="md:row-span-2 md:col-start-3 row-start-1 w-full">
         <div className="bg-[#f6f8fa] rounded flex flex-col justify-center items-center h-full">
           <div className="bg-[#ffffff] rounded-full p-3">
@@ -40,43 +42,6 @@ const Services = () => {
         </div>
       </div>
     </div>
-    // <div className="grid grid-cols-3 grid-rows-2 gap-4 justify-items-center w-[90%] mx-auto my-10">
-    //   <div className="row-span-2 w-full">
-    //     <div className="flex flex-col gap-5 bg-gray-100 justify-center items-center p-5">
-    //       <div className="bg-[#ffffff] rounded-full p-3">
-    //         <TbTruckDelivery className="size-10 text-[#5138ee]" />
-    //       </div>
-    //       <h3 className="p-5">Super Fast and Free Delivery</h3>
-    //     </div>
-    //   </div>
-
-    //   <div className="w-full">
-    //     <div className="flex flex-col gap-5 bg-gray-100 justify-center items-center p-5">
-    //       <div className="bg-[#ffffff] rounded-full p-3">
-    //         <TbTruckDelivery className="size-10 text-[#5138ee]" />
-    //       </div>
-    //       <h3 className="p-5">Super Fast and Free Delivery</h3>
-    //     </div>
-    //   </div>
-
-    //   <div className="col-start-2 row-start-2 w-full">
-    //     <div className="flex flex-col gap-5 bg-gray-100 justify-center items-center p-5">
-    //       <div className="bg-[#ffffff] rounded-full p-3">
-    //         <TbTruckDelivery className="size-10 text-[#5138ee]" />
-    //       </div>
-    //       <h3 className="p-5">Super Fast and Free Delivery</h3>
-    //     </div>
-    //   </div>
-
-    //   <div className="row-span-2 col-start-3 row-start-1 w-full">
-    //     <div className="flex flex-col gap-5 bg-gray-100 justify-center items-center p-5">
-    //       <div className="bg-[#ffffff] rounded-full p-3">
-    //         <TbTruckDelivery className="size-10 text-[#5138ee]" />
-    //       </div>
-    //       <h3 className="p-5">Super Fast and Free Delivery</h3>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
