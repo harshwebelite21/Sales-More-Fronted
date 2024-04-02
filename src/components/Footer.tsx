@@ -9,12 +9,14 @@ const Footer: React.FC = () => {
     { url: "https://instagram.com", iconClass: "fab fa-instagram" },
     { url: "https://linkedin.com", iconClass: "fab fa-linkedin-in" },
   ];
+
   const companyInfo = [
     {
       name: "Company",
       items: ["About us", "Blog", "Contact us", "Pricing"],
     },
   ];
+
   const supportInfo = [
     {
       name: "Support",
@@ -27,10 +29,13 @@ const Footer: React.FC = () => {
       ],
     },
   ];
+
+  const currentYear = new Date().getFullYear();
+
   return (
-    <div className="bg-[#263238] text-white border-t shadow-md flex justify-center items-center ">
-      <ul className="grid grid-cols-1 lg:grid-cols-5 md:grid-cols-4 w-[90%] mx-auto text-gray-100 gap-14 my-10">
-        <li className="flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-left space-y-2 py-2 gap-[10px]  lg:col-span-2">
+    <div className="bg-[#263238] text-white border-t shadow-md ">
+      <div className="grid grid-cols-1 md:grid-cols-3 place-items-center p-10 gap-10 ">
+        <div className="flex flex-col justify-center gap-5">
           <Link to="/" className="flex justify-center md:justify-start">
             <img
               src={logo}
@@ -38,11 +43,11 @@ const Footer: React.FC = () => {
               className="rounded-lg shadow-lg w-[70%] md:w-40 mx-auto md:mx-0"
             />
           </Link>
-          <div className="gap-[8px] flex flex-col ">
-            <span className=" text-gray-200 font-semibold text-xl">
-              Copy right @ 2024 Vaghasiya ltd.
+          <div className="gap-[8px] flex flex-col">
+            <span className="text-gray-200 font-semibold text-xl">
+              Copy right @ {currentYear} Vaghasiya ltd.
             </span>
-            <span className=" text-gray-400">All rights reserved</span>
+            <span className="text-gray-400">All rights reserved</span>
           </div>
           <div className="flex justify-center md:justify-start space-x-4 w-full">
             {socialMediaLinks.map((link) => (
@@ -57,40 +62,42 @@ const Footer: React.FC = () => {
               </a>
             ))}
           </div>
-        </li>
+        </div>
 
-        <li className="flex flex-col justify-start items-start">
-          {companyInfo.map((info, index) => (
-            <div key={index}>
-              <div className="mb-2 font-semibold text-2xl">{info.name}</div>
-              <ul>
-                {info.items.map((item, idx) => (
-                  <li key={idx} className="mb-1 hover:text-gray-300">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </li>
-
-        <ul className="flex flex-col justify-start items-start">
-          {supportInfo.map((info, index) => (
-            <li key={index} className="flex flex-col justify-start items-start">
-              <div className="mb-2 font-semibold text-2xl">{info.name}</div>
-              <ul>
-                {info.items.map((item, idx) => (
-                  <li key={idx} className="mb-1 hover:text-gray-300">
-                    {item}
-                  </li>
-                ))}
-              </ul>
+        <div className="flex gap-20">
+          {supportInfo.map((info) => (
+            <li key={info.name} className="flex flex-col gap-3">
+              <div>
+                <div className="mb-2 font-semibold text-2xl">{info.name}</div>
+                <ul>
+                  {info.items.map((item) => (
+                    <li key={item} className="mb-1 hover:text-gray-300">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </li>
           ))}
-        </ul>
 
-        <li className="flex flex-col justify-start">
-          <h1 className="font-semibold text-2xl  mb-2">Stay up to date</h1>
+          {companyInfo.map((info) => (
+            <li key={info.name} className="flex flex-col gap-3">
+              <div>
+                <div className="mb-2 font-semibold text-2xl">{info.name}</div>
+                <ul>
+                  {info.items.map((item) => (
+                    <li key={item} className="mb-1 hover:text-gray-300">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </div>
+
+        <div className="flex flex-col ">
+          <h1 className="font-semibold text-2xl mb-2">Stay up to date</h1>
           <form>
             <input
               type="text"
@@ -98,8 +105,8 @@ const Footer: React.FC = () => {
               placeholder="Email..."
             />
           </form>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 };
