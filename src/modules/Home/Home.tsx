@@ -1,6 +1,7 @@
-import { BannerImageSection } from "./Component/BannerImageSection";
+import { BannerImageSection } from "./Component/BannerSection/BannerImageSection";
 import Services from "./Component/Services/Services";
 import MySwiper from "./Component/Swiper/Swiper";
+import Trusted from "./Component/Trusted/Trusted";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <BannerImageSection />
       <MySwiper />
       <Services />
+      <Trusted />
     </div>
   );
 };

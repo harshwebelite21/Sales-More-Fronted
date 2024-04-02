@@ -23,12 +23,8 @@ const Services = () => {
     },
   ];
 
-  const colLength = serviceItems.length % 3 === 0 ? 3 : 4;
-
   return (
-    <div
-      className={`grid grid-cols-1 md:grid-cols-${colLength} w-[90%] mx-auto`}
-    >
+    <div className={`grid grid-cols-1 md:grid-cols-4 w-[90%] mx-auto`}>
       {serviceItems.map((item) => (
         <div className="p-5" key={item.title}>
           <div className="bg-[#f6f8fa] rounded flex flex-col items-center justify-center p-5 h-full">
