@@ -20,7 +20,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="sticky top-0 bg-white">
+    <div className="sticky top-0 bg-white z-50">
       <div className="flex justify-between px-4 md:px-10 py-5 text-lg border-b  shadow-md">
         <div className="items-center justify-start">
           <Link to="/">
