@@ -20,7 +20,7 @@ const SortSection = () => {
   };
 
   return (
-    <div className="w-full border-2 rounded my-5 grid items-center p-3 grid-cols-2 md:grid-cols-3 gap-3">
+    <div className="w-full border-2 rounded md:my-5 grid items-center p-3 grid-cols-2 md:grid-cols-3 gap-3">
       <div className="hidden md:flex">
         <button
           aria-label="Toggle grid view"
