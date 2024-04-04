@@ -1,5 +1,5 @@
-import ProductDetails from "./ProductDetails";
-import ProductImages from "./ProductImages";
+import ProductDetails from "./components/ProductDetails";
+import ProductImages from "./components/ProductImages";
 
 const ProductView = () => {
   return (
