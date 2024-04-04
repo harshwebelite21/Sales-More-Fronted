@@ -7,6 +7,9 @@ export default {
         "custom-gray": "rgba(33, 37, 41, 0.8)",
         "dynamic-blue": "rgb(78, 155, 222)",
       },
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [],
