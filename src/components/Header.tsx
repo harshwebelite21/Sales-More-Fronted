@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { MenuItem } from "../utils/types";
 
 const Header: React.FC = () => {
-  const [click, setClick] = useState(true);
+  const [click, setClick] = useState(false);
 
   const menuItems: MenuItem[] = [
     { to: "/", label: "Home" },
