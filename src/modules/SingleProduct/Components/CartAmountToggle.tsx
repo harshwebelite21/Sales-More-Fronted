@@ -12,7 +12,7 @@ const CartAmountToggle: React.FC<CartAmountToggleProps> = ({
   increaseQuantity,
   decreaseQuantity,
 }) => (
-  <div className="flex flex-center bg-white border-2 rounded-md p-[10px] gap-3 h-[50px]">
+  <div className="flex flex-center bg-white border-2 rounded-md p-1 gap-3 h-[35px]">
     <FaMinus
       className="text-[#333] cursor-pointer hover:text-[#007bff]"
       onClick={decreaseQuantity}
