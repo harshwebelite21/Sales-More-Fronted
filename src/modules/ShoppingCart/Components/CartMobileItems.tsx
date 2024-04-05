@@ -10,7 +10,7 @@ import {
 
 import "./Style/cartMobile.css";
 import { FaCircle } from "react-icons/fa";
-import CartAmountToggle from "../../SingleProduct/Components/ProdcutView/components/CartAmountToggle";
+import CartAmountToggle from "../../SingleProduct/Components/ProductView/components/CartAmountToggle";
 import { useState } from "react";
 
 const CartMobileItems = () => {

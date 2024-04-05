@@ -1,6 +1,6 @@
 import NavigationPanel from "./Components/NavigationPanel/NavigationPanel";
 import ProductMoreInfo from "./Components/ProductMoreInfo/ProductMoreInfo";
-import ProductView from "./Components/ProdcutView/ProductView";
+import ProductView from "./Components/ProductView/ProductView";
 
 const SingleProduct = () => {
   return (
