@@ -10,7 +10,7 @@ export default function BasicRating() {
       <Rating
         value={value}
         name="half-rating"
-        defaultValue={2.5}
+        defaultValue={0}
         precision={0.5}
         onChange={(event, newValue) => {
           setValue(newValue);

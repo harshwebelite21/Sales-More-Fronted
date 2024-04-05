@@ -1,3 +1,4 @@
+import { Button, ButtonGroup } from "@mui/material";
 import PropTypes from "prop-types";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
@@ -12,16 +13,50 @@ const CartAmountToggle: React.FC<CartAmountToggleProps> = ({
   increaseQuantity,
   decreaseQuantity,
 }) => (
-  <div className="flex flex-center bg-white border-2 rounded-md p-[10px] gap-3 h-[50px]">
-    <FaMinus
-      className="text-[#333] cursor-pointer hover:text-[#007bff]"
-      onClick={decreaseQuantity}
-    />
-    <h2 className="my-[20px] text-2xl"> {quantity}</h2>
-    <FaPlus
-      className="text-[#333] cursor-pointer hover:text-[#007bff]"
-      onClick={increaseQuantity}
-    />
+  <div className="flex-center">
+    <ButtonGroup
+      variant="contained"
+      aria-label="Basic button group"
+      size="small"
+      sx={{ borderColor: "gray", border: "2px solid gray" }}
+    >
+      <Button
+        onClick={decreaseQuantity}
+        sx={{
+          backgroundColor: "#e0ded8",
+          color: "#111",
+          padding: "0px",
+          "&:hover": {
+            backgroundColor: "#d1d0ca",
+          },
+        }}
+      >
+        <FaMinus />
+      </Button>
+      <Button
+        sx={{
+          backgroundColor: "white",
+          color: "#111",
+          "&:hover": {
+            backgroundColor: "#f0f0f0",
+          },
+        }}
+      >
+        {quantity}
+      </Button>
+      <Button
+        onClick={increaseQuantity}
+        sx={{
+          backgroundColor: "#e0ded8",
+          color: "#111",
+          "&:hover": {
+            backgroundColor: "#d1d0ca", // Change this color to your desired hover color
+          },
+        }}
+      >
+        <FaPlus />
+      </Button>
+    </ButtonGroup>
   </div>
 );
 

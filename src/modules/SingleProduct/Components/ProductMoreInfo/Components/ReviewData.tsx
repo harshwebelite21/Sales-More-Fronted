@@ -52,7 +52,7 @@ const ReviewData = () => {
             <div className="px-5 m-1 ml-0">
               <label
                 htmlFor=" Rating"
-                className="font-bold text-text-[#212529] text-lg m-1 ml-0"
+                className="font-bold text-[#212529] text-lg m-1 ml-0"
               >
                 Rating *
               </label>
@@ -64,7 +64,7 @@ const ReviewData = () => {
               <div className="">
                 <label
                   htmlFor="name"
-                  className="font-bold text-text-[#212529] text-lg"
+                  className="font-bold text-[#212529] text-lg"
                 >
                   Name
                 </label>
@@ -81,7 +81,7 @@ const ReviewData = () => {
               <div className="">
                 <label
                   htmlFor=" email"
-                  className="font-bold text-text-[#212529] text-lg"
+                  className="font-bold text-[#212529] text-lg"
                 >
                   Email
                 </label>
@@ -99,7 +99,7 @@ const ReviewData = () => {
             <div className="px-5">
               <label
                 htmlFor=" review"
-                className="font-bold text-text-[#212529] text-lg"
+                className="font-bold text-[#212529] text-lg"
               >
                 Review
               </label>
