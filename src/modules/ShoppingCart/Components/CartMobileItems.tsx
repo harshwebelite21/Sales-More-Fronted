@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  ButtonGroup,
   Card,
   CardActions,
   CardContent,
@@ -10,7 +9,9 @@ import {
 } from "@mui/material";
 
 import "./Style/cartMobile.css";
-import { FaCircle, FaMinus, FaPlus } from "react-icons/fa";
+import { FaCircle } from "react-icons/fa";
+import CartAmountToggle from "../../SingleProduct/Components/ProdcutView/components/CartAmountToggle";
+import { useState } from "react";
 
 const CartMobileItems = () => {
   const products = [
@@ -66,6 +67,16 @@ const CartMobileItems = () => {
   const textTruncate = (text = "", length = 35) => {
     return text.length > length ? text.substring(0, length) + "..." : text;
   };
+
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
+  };
   return (
     <div className=" rounded-md flex flex-col gap-3">
       <Button
@@ -74,7 +85,6 @@ const CartMobileItems = () => {
           margin: "10px",
           fontFamily: "inherit",
           fontWeight: "bold",
-          backgroundColor: "#ff9900",
           color: "black",
           borderColor: "#ff9900",
           "&:hover": {
@@ -143,40 +153,11 @@ const CartMobileItems = () => {
               className="w-full flex gap-5 "
               sx={{ paddingInline: "20px" }}
             >
-              <ButtonGroup
-                variant="contained"
-                aria-label="Basic button group"
-                size="small"
-                sx={{ borderColor: "gray" }}
-              >
-                <Button
-                  sx={{
-                    backgroundColor: "#e0ded8",
-                    color: "#111",
-                    borderColor: "#bdbdbd #bdbdbd #bdbdbd",
-                  }}
-                >
-                  <FaMinus />
-                </Button>
-                <Button
-                  sx={{
-                    backgroundColor: "white",
-                    color: "#111",
-                    borderColor: "#bdbdbd #bdbdbd #bdbdbd",
-                  }}
-                >
-                  2
-                </Button>
-                <Button
-                  sx={{
-                    backgroundColor: "#e0ded8",
-                    color: "#111",
-                    borderColor: "#bdbdbd #bdbdbd #bdbdbd",
-                  }}
-                >
-                  <FaPlus />
-                </Button>
-              </ButtonGroup>
+              <CartAmountToggle
+                quantity={quantity}
+                increaseQuantity={increaseQuantity}
+                decreaseQuantity={decreaseQuantity}
+              />
 
               <Button
                 size="small"

@@ -4,6 +4,7 @@ import ColorSelection from "./ColorSelection";
 import CartAmountToggle from "./CartAmountToggle";
 import SizeSelection from "./SizeSelection";
 import { FaHeart } from "react-icons/fa";
+import { Button } from "@mui/material";
 
 const ProductDetails = () => {
   const socialMediaLinks = [
@@ -50,18 +51,51 @@ const ProductDetails = () => {
           <ColorSelection />
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4 h-[50px]">
+      <div className="grid grid-cols-3 gap-7 h-[50px]">
         <CartAmountToggle
           quantity={quantity}
           increaseQuantity={increaseQuantity}
           decreaseQuantity={decreaseQuantity}
         />
-        <button className="bg-black text-white rounded-md p-2 text-sm cursor-pointer">
+        <Button
+          size="medium"
+          sx={{
+            margin: "10px",
+            fontFamily: "inherit",
+            paddingInline: "55px",
+
+            fontWeight: "bold",
+            backgroundColor: "black",
+            color: "white",
+            borderColor: "#ff9900",
+            "&:hover": {
+              backgroundColor: "#ffaa00",
+              borderColor: "#ffaa00",
+            },
+          }}
+          className="whitespace-nowrap"
+        >
           Add To Cart
-        </button>
-        <button className="bg-black text-white rounded-md p-2 text-sm cursor-pointer">
+        </Button>
+        <Button
+          size="medium"
+          className="whitespace-nowrap"
+          sx={{
+            margin: "10px",
+            paddingInline: "50px",
+            fontFamily: "inherit",
+            fontWeight: "bold",
+            backgroundColor: "black",
+            color: "white",
+            borderColor: "#ff9900",
+            "&:hover": {
+              backgroundColor: "#ffaa00",
+              borderColor: "#ffaa00",
+            },
+          }}
+        >
           Compare +
-        </button>
+        </Button>
       </div>
       <hr />
       <div className="flex gap-5">

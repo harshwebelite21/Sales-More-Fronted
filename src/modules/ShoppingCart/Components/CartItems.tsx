@@ -1,6 +1,6 @@
 import { FaCircle, FaTrash } from "react-icons/fa";
-import CartAmountToggle from "../../SingleProduct/Components/CartAmountToggle";
 import { useState } from "react";
+import CartAmountToggle from "../../SingleProduct/Components/ProdcutView/components/CartAmountToggle";
 
 const CartItems = () => {
   const products = [

@@ -31,11 +31,11 @@ const ProductImages = () => {
           </div>
         </div>
 
-        <div className="h-96 w-full size-56">
+        <div className="m-h-96 w-full size-56">
           <img
             src={selectedImage}
             alt={selectedImage}
-            className="object-cover h-full w-full rounded-md"
+            className="object-cover lg:h-80 w-full rounded-md"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@ const ProductImages = () => {
                 <img
                   src={image}
                   alt={image}
-                  className="w-full h-auto rounded-[20px]"
+                  className="w-full h-auto rounded-[20px] object-cover"
                 />
               </div>
             </SwiperSlide>
