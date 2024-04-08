@@ -12,58 +12,11 @@ import "./Style/cartMobile.css";
 import { FaCircle } from "react-icons/fa";
 import CartAmountToggle from "../../SingleProduct/Components/ProductView/components/CartAmountToggle";
 import { useState } from "react";
+import { useProductsContext } from "../../../Context/ProductsContext";
+import { Product } from "../../../Types/ProductsTypes";
 
 const CartMobileItems = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Laptopasdfghjkluiopsdfghjklsdfghjkl;''asdfghjklasdfghjkl;",
-      image: "https://via.placeholder.com/150",
-      color: "Silver",
-      price: 1200,
-      quantity: 2,
-    },
-    {
-      id: 2,
-      name: "Smartphone gfhthhhhhhhhhhhhhhh",
-      image: "https://via.placeholder.com/150",
-      color: "Black",
-      price: 800,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      name: "Tablet",
-      image: "https://via.placeholder.com/150",
-      color: "Space Gray",
-      price: 500,
-      quantity: 3,
-    },
-    {
-      id: 4,
-      name: "Headphones",
-      image: "https://via.placeholder.com/150",
-      color: "red",
-      price: 150,
-      quantity: 2,
-    },
-    {
-      id: 5,
-      name: "Camera",
-      image: "https://via.placeholder.com/150",
-      color: "yellow",
-      price: 1000,
-      quantity: 1,
-    },
-    {
-      id: 6,
-      name: "Smartwatch",
-      image: "https://via.placeholder.com/150",
-      color: "Gold",
-      price: 300,
-      quantity: 2,
-    },
-  ];
+  const { products } = useProductsContext();
   const textTruncate = (text = "", length = 35) => {
     return text.length > length ? text.substring(0, length) + "..." : text;
   };
@@ -96,10 +49,10 @@ const CartMobileItems = () => {
         Proceed To Buy
       </Button>
       <hr className="border-t-2" />
-      {products.map((product) => {
+      {products.map((product: Product) => {
         const shortDescription = textTruncate(`${product.name}`, 35);
         return (
-          <Card key={product.id} sx={{ backgroundColor: "#f2f2f5" }}>
+          <Card key={product._id} sx={{ backgroundColor: "#f2f2f5" }}>
             <Box className="flex flex-row w-full" sx={{ display: "flex" }}>
               <div className="relative w-[50%] rounded-l m-[7px] overflow-hidden ">
                 <CardMedia
