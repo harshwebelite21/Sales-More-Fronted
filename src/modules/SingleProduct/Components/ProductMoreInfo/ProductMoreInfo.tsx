@@ -13,7 +13,7 @@ const ProductMoreInfo = () => {
   };
 
   return (
-    <div className="w-[90%] mx-auto">
+    <div className="w-[90%] mx-auto my-10">
       <div>
         <Box sx={{ width: "100%" }}>
           <Tabs

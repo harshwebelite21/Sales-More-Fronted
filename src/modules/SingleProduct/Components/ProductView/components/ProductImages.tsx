@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 const ProductImages = () => {
   const images: string[] = [
@@ -14,33 +15,40 @@ const ProductImages = () => {
     setSelectedImage(image);
   };
 
+  const applyCss = () => {};
   return (
     <>
-      <div className="lg:flex hidden gap-5 m-3 ">
-        <div className="flex flex-col gap-4 h-full lg:w-[25%] md:w-[45%] ">
-          <div className="w-full flex-col flex gap-3 justify-center md:justify-start">
-            {images.map((image: string) => (
-              <img
-                key={image}
-                src={image}
-                alt={image}
-                onClick={() => handleImageClick(image)}
-                className="cursor-pointer rounded-md"
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="m-h-96 w-full size-56">
+      <div className="md:flex flex-col gap-5 w-full h-full hidden">
+        <div className=" w-full h-[380px]">
           <img
             src={selectedImage}
             alt={selectedImage}
-            className="object-cover lg:h-80 w-full rounded-md"
+            onChange={() => applyCss()}
+            className="object-cover h-full w-full rounded-md random"
           />
         </div>
+        <div className="grid grid-cols-4 gap-4">
+          {images.map((image: string) => (
+            <img
+              key={image}
+              src={image}
+              alt={image}
+              onClick={() => handleImageClick(image)}
+              className={`cursor-pointer object-cover rounded-md w-auto `}
+            />
+          ))}
+        </div>
       </div>
-      <div className="gap-5 m-3 lg:hidden">
-        <Swiper className="mySwiper">
+      <div className="gap-5 m-3 md:hidden">
+        <Swiper
+          className="mySwiper"
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
+        >
           {images.map((image) => (
             <SwiperSlide key={image}>
               <div className=" relative">

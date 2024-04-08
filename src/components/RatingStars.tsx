@@ -1,8 +1,8 @@
-import Box from "@mui/material/Box";
-import Rating from "@mui/material/Rating";
+import { Box, Rating } from "@mui/material";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
-export default function BasicRating() {
+const RatingStars = ({ readOnly }: { readOnly: boolean }) => {
   const [value, setValue] = useState<number | null>(2);
 
   return (
@@ -15,7 +15,14 @@ export default function BasicRating() {
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
+        readOnly={readOnly}
       />
     </Box>
   );
-}
+};
+
+RatingStars.propTypes = {
+  readOnly: PropTypes.bool.isRequired,
+};
+
+export default RatingStars;
