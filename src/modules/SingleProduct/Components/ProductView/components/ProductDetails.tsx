@@ -1,10 +1,10 @@
 import { useState } from "react";
-import StarModule from "./StarAndReview";
 import ColorSelection from "./ColorSelection";
 import CartAmountToggle from "./CartAmountToggle";
 import SizeSelection from "./SizeSelection";
 import { FaHeart } from "react-icons/fa";
 import { Button } from "@mui/material";
+import RatingStars from "../../../../../components/RatingStars";
 
 const ProductDetails = () => {
   const socialMediaLinks = [
@@ -18,16 +18,20 @@ const ProductDetails = () => {
   const increaseQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
   };
+  const review = 5;
 
   const decreaseQuantity = () => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
   };
+
   return (
-    <div className=" gap-5 m-3 flex flex-col justify-start">
+    <div className=" gap-5 flex flex-col justify-start">
       <div className="text-4xl font-sans">Product 1</div>
       <div className="text-lg text-[#9F9F9F] font-sans">Rs. 25000</div>
-      <div className="">
-        <StarModule />
+      <div className="icon-style flex items-center">
+        <RatingStars readOnly={true} />
+        <p className="mx-5 text-[#9F9F9F] border-1-">|</p>
+        <p className="text-[#9F9F9F]">{review} customer reviews</p>
       </div>
       <div className="text-sm font-sans">
         This code tells Tailwind CSS to use &quot;Poppins&quot; as the preferred
@@ -98,8 +102,9 @@ const ProductDetails = () => {
         </Button>
       </div>
       <hr />
-      <div className="flex gap-5">
-        <div className="flex justify-center md:justify-start space-x-4">
+
+      <div className="flex justify-between items-center">
+        <div className="flex gap-4">
           {socialMediaLinks.map((link) => (
             <a
               key={link.url}
@@ -112,7 +117,7 @@ const ProductDetails = () => {
             </a>
           ))}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2 ">
           <FaHeart
             color={`${addToWishList ? "black" : "red"}`}
             className="  text-xl cursor-pointer "
@@ -122,10 +127,9 @@ const ProductDetails = () => {
             className="text-gray-700 cursor-pointer"
             onClick={() => setAddToWishList(!addToWishList)}
           >
-            Save to Wishlist
+            Add to Wishlist
           </span>
         </div>
-        <div></div>
       </div>
     </div>
   );

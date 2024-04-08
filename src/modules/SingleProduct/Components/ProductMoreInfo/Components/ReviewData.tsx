@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import BasicRating from "./StarRatingForm";
+import RatingStars from "../../../../../components/RatingStars";
 
 const ReviewData = () => {
   const dummyData = [
@@ -57,7 +57,7 @@ const ReviewData = () => {
                 Rating *
               </label>
               <div className="m-1 ml-0">
-                <BasicRating />
+                <RatingStars readOnly={false} />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 px-5 gap-2">
