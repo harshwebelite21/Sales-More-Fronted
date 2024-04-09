@@ -47,8 +47,6 @@ export const ProductsContextProvider = ({
 
   const getSingleProduct = async (url: string) => {
     try {
-      console.log("this will must run");
-
       setState((prevState) => ({
         ...prevState,
         isSingleLoading: true,
