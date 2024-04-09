@@ -1,9 +1,6 @@
 import { useState } from "react";
-
-const SizeSelection = () => {
-  const sizes = ["Small", "Medium", "Large", "XL", "XXL"];
-
-  const [selectedSize, setSelectedColor] = useState(sizes[0]);
+const SizeSelection = ({ sizes }: { sizes: string[] }) => {
+  const [selectedSize, setSelectedColor] = useState(sizes?.at(0));
 
   const handleClick = (size: string) => {
     setSelectedColor(size);
@@ -11,7 +8,7 @@ const SizeSelection = () => {
 
   return (
     <div className="flex gap-3">
-      {sizes.map((size) => (
+      {sizes?.map((size) => (
         <div
           key={size}
           onClick={() => handleClick(size)}

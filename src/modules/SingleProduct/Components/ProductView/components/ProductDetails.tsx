@@ -5,20 +5,22 @@ import SizeSelection from "./SizeSelection";
 import { FaHeart } from "react-icons/fa";
 import { Button } from "@mui/material";
 import RatingStars from "../../../../../components/RatingStars";
+import { Product } from "../../../../../Types/ProductsTypes";
 
-const ProductDetails = () => {
+const ProductDetails = ({ product }: { product: Product }) => {
   const socialMediaLinks = [
     { url: "https://facebook.com", iconClass: "fab fa-facebook-f" },
     { url: "https://twitter.com", iconClass: "fab fa-twitter" },
     { url: "https://instagram.com", iconClass: "fab fa-instagram" },
     { url: "https://linkedin.com", iconClass: "fab fa-linkedin-in" },
   ];
+
+  const { name, price, description, colors, stars, sizes } = product;
   const [quantity, setQuantity] = useState(1);
   const [addToWishList, setAddToWishList] = useState(false);
   const increaseQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
   };
-  const review = 5;
 
   const decreaseQuantity = () => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
@@ -26,33 +28,26 @@ const ProductDetails = () => {
 
   return (
     <div className=" gap-5 flex flex-col justify-start">
-      <div className="text-4xl font-sans">Product 1</div>
-      <div className="text-lg text-[#9F9F9F] font-sans">Rs. 25000</div>
+      <div className="text-4xl font-sans">{name}</div>
+      <div className="text-lg text-[#9F9F9F] font-sans">Rs. {price}</div>
       <div className="icon-style flex items-center">
-        <RatingStars readOnly={true} />
+        <RatingStars readOnly={true} stars={stars} />
         <p className="mx-5 text-[#9F9F9F] border-1-">|</p>
-        <p className="text-[#9F9F9F]">{review} customer reviews</p>
+        <p className="text-[#9F9F9F]">{stars} customer reviews</p>
       </div>
-      <div className="text-sm font-sans">
-        This code tells Tailwind CSS to use &quot;Poppins&quot; as the preferred
-        font in the sans-serif font family stack. Make sure you have the
-        &quot;Poppins&quot; font available in your project for this to work.
-        This code tells Tailwind CSS to use &quot;Poppins&quot; as the preferred
-        font in the sans-serif font family stack. Make sure you have the
-        &quot;Poppins&quot; font available in your project for this to work.
-      </div>
+      <div className="text-sm font-sans">{description}</div>
 
       <div className="flex flex-col">
         <div className="text-sm text-[#9F9F9F] font-semibold">Size</div>
         <div>
-          <SizeSelection />
+          <SizeSelection sizes={sizes} />
         </div>
       </div>
 
       <div className="flex flex-col">
         <div className="text-sm font-semibold text-[#9F9F9F] ">Color</div>
         <div>
-          <ColorSelection />
+          <ColorSelection colors={colors} />
         </div>
       </div>
       <div className="grid grid-cols-3 gap-7 h-[50px]">

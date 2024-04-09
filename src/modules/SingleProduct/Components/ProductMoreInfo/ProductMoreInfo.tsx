@@ -4,8 +4,10 @@ import Box from "@mui/material/Box";
 import { useState } from "react";
 import TablesData from "./Components/TablesData";
 import ReviewData from "./Components/ReviewData";
+import { Product } from "../../../../Types/ProductsTypes";
 
-const ProductMoreInfo = () => {
+const ProductMoreInfo = ({ product }: { product: Product }) => {
+  const { description, attributes } = product;
   const [value, setValue] = useState("one");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -49,20 +51,10 @@ const ProductMoreInfo = () => {
       </div>
       <div className="m-3 ">
         <div className={`${value === "one" ? "" : "hidden"} text-gray-400`}>
-          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-          posuere cubilia Curae; Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Fusce sagittis, massa fringilla consequat blandit,
-          mauris ligula porta nisi, non tristique enim sapien vel nisl.
-          Suspendisse vestibulum lobortis dapibus. Vestibulum ante ipsum primis
-          in faucibus orci luctus et ultrices posuere cubilia Curae; Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Fusce sagittis, massa
-          fringilla consequat blandit, mauris ligula porta nisi, non tristique
-          enim sapien vel nisl. Suspendisse vestibulum lobortis dapibus.
-          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-          posuere cubilia Curae;
+          {description}
         </div>
         <div className={`${value === "two" ? "" : "hidden"}`}>
-          <TablesData />
+          <TablesData attributes={attributes} />
         </div>
         <div className={`${value === "three" ? "" : "hidden"}`}>
           <ReviewData />

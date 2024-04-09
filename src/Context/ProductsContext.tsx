@@ -1,29 +1,29 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import axios from "axios";
-import { Product } from "../Types/ProductsTypes";
+import { Product, ProductContext } from "../Types/ProductsTypes";
+import { get } from "../utils/axios";
 
-const initialState = {
+const initialState: ProductContext = {
   isLoading: false,
   isError: false,
   products: [],
   featureProducts: [],
   isSingleLoading: false,
-  singleProduct: {},
+  singleProduct: {} as Product,
 };
 
-export const ProductsContext = createContext<typeof initialState>(initialState);
+export const ProductsContext = createContext<ProductContext>(initialState);
 
 export const ProductsContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState<ProductContext>(initialState);
 
   const getProducts = async (url: string) => {
     setState((prevState) => ({ ...prevState, isLoading: true }));
     try {
-      const res = await axios.get(url);
+      const res = await get(url);
       const products = await res.data;
 
       const featureProducts = products.filter(
@@ -35,6 +35,32 @@ export const ProductsContextProvider = ({
         products,
         featureProducts,
         isLoading: false,
+      }));
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        isError: true,
+        isLoading: false,
+      }));
+    }
+  };
+
+  const getSingleProduct = async (url: string) => {
+    try {
+      console.log("this will must run");
+
+      setState((prevState) => ({
+        ...prevState,
+        isSingleLoading: true,
+      }));
+
+      const res = await get(url);
+      const singleProduct = await res.data;
+
+      setState((prevState) => ({
+        ...prevState,
+        singleProduct: singleProduct.data,
+        isSingleLoading: false,
       }));
     } catch (error) {
       setState((prevState) => ({
@@ -62,11 +88,12 @@ export const ProductsContextProvider = ({
       featureProducts,
       isSingleLoading,
       singleProduct,
+      getSingleProduct,
     };
   }, [state]);
 
   useEffect(() => {
-    getProducts("http://localhost:3000/product");
+    getProducts("http://localhost:3000/products");
   }, []);
 
   return (

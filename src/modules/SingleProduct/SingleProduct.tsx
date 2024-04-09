@@ -1,13 +1,31 @@
+import { useParams } from "react-router-dom";
 import NavigationPanel from "./Components/NavigationPanel/NavigationPanel";
 import ProductMoreInfo from "./Components/ProductMoreInfo/ProductMoreInfo";
 import ProductView from "./Components/ProductView/ProductView";
+import { useProductsContext } from "../../Context/ProductsContext";
+import { useEffect } from "react";
 
 const SingleProduct = () => {
+  const { getSingleProduct, singleProduct, isSingleLoading } =
+    useProductsContext();
+  const { id } = useParams();
+
+  useEffect(() => {
+    getSingleProduct?.(`http://localhost:3000/products/${id}`);
+  }, [id]);
+
+  if (isSingleLoading) {
+    return <div>Loading product details...</div>;
+  }
+  if (!singleProduct) {
+    return <div>Error loading product details.</div>;
+  }
+
   return (
     <div>
       <NavigationPanel />
-      <ProductView />
-      <ProductMoreInfo />
+      <ProductView product={singleProduct} />
+      <ProductMoreInfo product={singleProduct} />
     </div>
   );
 };

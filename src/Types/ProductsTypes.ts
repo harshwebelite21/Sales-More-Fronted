@@ -34,12 +34,13 @@ export interface Product {
   availableQuantity: number;
   category: CategoryEnum;
   images: string[];
-  image?: string;
-  company?: string;
-  stars?: number;
-  featured?: boolean;
-  colors?: string[];
-  attributes?: { name: string; value: string }[];
+  image: string;
+  company: string;
+  sizes: string[];
+  stars: number;
+  featured: boolean;
+  colors: string[];
+  attributes: { name: string; value: string }[];
 }
 
 export interface ProductsContextProviderProps {
@@ -51,11 +52,12 @@ export interface ProductAction {
   payload?: Product | Product[];
 }
 
-export interface ProductsInitialState {
+export interface ProductContext {
   isLoading: boolean;
   isError: boolean;
   products: Product[];
   featureProducts: Product[];
-  singleProduct?: Product; // Optional property (might not always have a single product)
-  isSingleLoading?: boolean; // Optional property (might not always be fetching a single product)
+  isSingleLoading: boolean;
+  singleProduct: Product;
+  getSingleProduct?: (url: string) => Promise<void>;
 }
