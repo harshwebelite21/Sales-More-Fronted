@@ -2,34 +2,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { SwiperOptions } from "swiper/types";
-
-// Sample data for products
-const products = [
-  {
-    id: 1,
-    name: "Product 1",
-    imageUrl:
-      "https://images.unsplash.com/photo-1587590227264-0ac64ce63ce8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 3,
-    name: "Product 3",
-    imageUrl:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 4,
-    name: "Product 4",
-    imageUrl:
-      "https://images.unsplash.com/photo-1605870445919-838d190e8e1b?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-];
+import { useProductsContext } from "../../../../Context/ProductsContext";
+import { Product } from "../../../../Types/ProductsTypes";
 
 const swiperOptions: SwiperOptions = {
   breakpoints: {
@@ -43,6 +17,8 @@ const swiperOptions: SwiperOptions = {
 };
 
 const MySwiper = () => {
+  const { featureProducts } = useProductsContext();
+
   return (
     <div className="relative my-10 md:mb-20 flex flex-col gap-5 w-[90%] mx-auto -z-10">
       <div className=" relative">
@@ -68,13 +44,13 @@ const MySwiper = () => {
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
         >
-          {products.map((product) => (
-            <SwiperSlide key={product.id}>
-              <div className=" relative">
+          {featureProducts.map((product: Product) => (
+            <SwiperSlide key={product._id}>
+              <div className="relative">
                 <img
-                  src={product.imageUrl}
+                  src={product.image}
                   alt={product.name}
-                  className="w-full h-auto rounded-[20px]"
+                  className=" border-2 rounded-[20px] h-[250px] w-[425px]  object-fit"
                 />
               </div>
             </SwiperSlide>
