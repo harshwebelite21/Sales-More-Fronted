@@ -3,10 +3,18 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import TablesData from "./Components/TablesData";
+import { Product, ProductReview } from "../../../../Types/ProductsTypes";
 import ReviewData from "./Components/ReviewData";
-import { Product } from "../../../../Types/ProductsTypes";
 
-const ProductMoreInfo = ({ product }: { product: Product }) => {
+const ProductMoreInfo = ({
+  product,
+  reviewData,
+  isReviewLoading,
+}: {
+  product: Product;
+  reviewData: ProductReview[];
+  isReviewLoading: boolean;
+}) => {
   const { description, attributes } = product;
   const [value, setValue] = useState("one");
 
@@ -45,7 +53,10 @@ const ProductMoreInfo = ({ product }: { product: Product }) => {
           >
             <Tab value="one" label="DESCRIPTION" />
             <Tab value="two" label="ADDITIONAL INFORMATION" />
-            <Tab value="three" label="REVIEWS (2)" />
+            <Tab
+              value="three"
+              label={`REVIEWS (${Object.keys(reviewData).length})`}
+            />
           </Tabs>
         </Box>
       </div>
@@ -57,7 +68,16 @@ const ProductMoreInfo = ({ product }: { product: Product }) => {
           <TablesData attributes={attributes} />
         </div>
         <div className={`${value === "three" ? "" : "hidden"}`}>
-          <ReviewData />
+          {Object.keys(reviewData).length === 0 ? (
+            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <p className="text-gray-700">No Review Found For This Product</p>
+            </div>
+          ) : (
+            <ReviewData
+              reviewData={reviewData}
+              isReviewLoading={isReviewLoading}
+            />
+          )}
         </div>
       </div>
     </div>

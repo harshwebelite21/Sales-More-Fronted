@@ -9,7 +9,12 @@ const initialState: ProductContext = {
   featureProducts: [],
   isSingleLoading: false,
   singleProduct: {} as Product,
+  isReviewLoading: false,
+  review: [],
 };
+
+const authToken =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWNiNTk0MjM3ZWNhY2UzNjgyNzE4OTEiLCJyb2xlIjoxLCJpYXQiOjE3MTI3MjM3OTEsImV4cCI6MTcxMjgxMDE5MX0.J6-ONbwBw-BTYjJeLPhVZU9_CYVHim2MpCMgYfdbSWQ";
 
 export const ProductsContext = createContext<ProductContext>(initialState);
 
@@ -69,6 +74,31 @@ export const ProductsContextProvider = ({
     }
   };
 
+  const getProductReview = async (url: string) => {
+    try {
+      setState((prevState) => ({
+        ...prevState,
+        isReviewLoading: true,
+      }));
+
+      const res = await get(url, {
+        token: authToken,
+      });
+      const review = await res.data;
+      setState((prevState) => ({
+        ...prevState,
+        review,
+        isReviewLoading: false,
+      }));
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        isError: true,
+        isLoading: false,
+      }));
+    }
+  };
+
   const contextValue = useMemo(() => {
     const {
       products,
@@ -77,6 +107,8 @@ export const ProductsContextProvider = ({
       featureProducts,
       isSingleLoading,
       singleProduct,
+      isReviewLoading,
+      review,
     } = state;
 
     return {
@@ -86,12 +118,15 @@ export const ProductsContextProvider = ({
       featureProducts,
       isSingleLoading,
       singleProduct,
+      isReviewLoading,
+      review,
       getSingleProduct,
+      getProductReview,
     };
   }, [state]);
 
   useEffect(() => {
-    getProducts("http://localhost:3000/products");
+    getProducts("products");
   }, []);
 
   return (

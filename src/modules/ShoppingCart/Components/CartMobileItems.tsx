@@ -16,12 +16,8 @@ import { useProductsContext } from "../../../Context/ProductsContext";
 import { Product } from "../../../Types/ProductsTypes";
 
 const CartMobileItems = () => {
-  const { products } = useProductsContext();
-  const textTruncate = (text = "", length = 35) => {
-    return text.length > length ? text.substring(0, length) + "..." : text;
-  };
-
   const [quantity, setQuantity] = useState(1);
+  const { products } = useProductsContext();
 
   const increaseQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -30,6 +26,7 @@ const CartMobileItems = () => {
   const decreaseQuantity = () => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
   };
+
   return (
     <div className=" rounded-md flex flex-col gap-3">
       <Button
@@ -50,7 +47,6 @@ const CartMobileItems = () => {
       </Button>
       <hr className="border-t-2" />
       {products.map((product: Product) => {
-        const shortDescription = textTruncate(`${product.name}`, 35);
         return (
           <Card key={product._id} sx={{ backgroundColor: "#f2f2f5" }}>
             <Box className="flex flex-row w-full" sx={{ display: "flex" }}>
@@ -75,7 +71,7 @@ const CartMobileItems = () => {
               >
                 <Typography className="max-w-md">
                   <h1 className="text-lg font-bold break-words">
-                    {shortDescription}
+                    {product.name}
                   </h1>
                 </Typography>
                 <Typography className="flex flex-row gap-6 justify-start items-center ">
@@ -93,7 +89,7 @@ const CartMobileItems = () => {
                 </Typography>
                 <Typography className="grid grid-cols-5 text-sm gap-12 items-center ">
                   <div className="col-span-1 whitespace-nowrap">Size :</div>
-                  {/* <div className="text-sm tracking-wider">1kg(Pack Of 1)</div> */}
+                  <div className="text-sm tracking-wider">1kg(Pack Of 1)</div>
                   <div className="col-span-4">
                     <h1 className="text-sm break-words whitespace-nowrap">
                       1kg(Pack Of 1)

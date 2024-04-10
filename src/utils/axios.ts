@@ -2,18 +2,24 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
-  //   baseURL: process.env.REACT_APP_API_URL || "", // Fetch base URL from a configuration file (optional)
+  baseURL: "http://localhost:3000/",
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-export const get = async (
+export const get = async <T = any>(
   url: string,
-  config?: AxiosRequestConfig,
-): Promise<any> => {
-  return axiosInstance.get(url, config);
+  config?: { query?: T; token?: string },
+): Promise<T> => {
+  const { token, query } = config || {};
+
+  return axiosInstance.get(url, {
+    ...config,
+    headers: { ...(token ? { authorization: token } : {}) },
+    params: query,
+  });
 };
 
 export const post = async (

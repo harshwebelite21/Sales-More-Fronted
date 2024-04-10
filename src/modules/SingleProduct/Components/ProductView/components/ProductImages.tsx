@@ -3,8 +3,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { Product } from "../../../../../Types/ProductsTypes";
 
-const ProductImages = ({ product }: { product: Product }) => {
-  const isSingleLoading = false;
+const ProductImages = ({
+  product,
+  isSingleLoading,
+}: {
+  product: Product;
+  isSingleLoading: boolean;
+}) => {
   const [selectedImage, setSelectedImage] = useState(product?.images?.at(0));
 
   const handleImageClick = (image: string) => {
