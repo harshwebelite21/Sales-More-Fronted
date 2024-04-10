@@ -1,28 +1,91 @@
+import { useEffect, useState } from "react";
 import {
   Button,
   MenuItem,
   Select,
-  SelectChangeEvent,
   TextField,
   Slider,
+  SelectChangeEvent,
 } from "@mui/material";
-import { useState } from "react";
+import { useProductsContext } from "../../../Context/ProductsContext";
+import { CategoryEnum } from "../../../utils/enums";
+import { Product } from "../../../Types/ProductsTypes";
+
+const useDebounce = (value: string, delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+
+const filterProductsByCompany = (products: Product[]): string[] => {
+  const companies: Set<string> = new Set();
+  products.forEach(({ company }) => companies.add(company));
+  return Array.from(companies);
+};
 
 const FilterSection = () => {
-  const categories = ["All", "jgs", "fgd", "dfv"];
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const { getFilteredValue, filterProducts } = useProductsContext();
 
-  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
-    setSelectedCategory(event.target.value);
+  // State variables
+  const [selectedCategory, setSelectedCategory] = useState("1");
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const debouncedSearchValue = useDebounce(searchValue, 1000);
+  const [selectedCompany, setSelectedCompany] = useState("");
+
+  // Derived data
+  const categories = Object.values(CategoryEnum).filter(
+    (category) => typeof category === "string",
+  );
+  const company = filterProductsByCompany(filterProducts);
+
+  // Handlers
+  const handleCompanyChange = (event: SelectChangeEvent<string>) => {
+    setSelectedCompany(event.target.value);
   };
-  const handlePriceChange = (event: Event, newValue: number | number[]) => {
+
+  const handlePriceChange = (_event: Event, newValue: number | number[]) => {
     setPriceRange(newValue as [number, number]);
   };
+
   const toggleFilterVisibility = () => {
     setIsFilterVisible(!isFilterVisible);
   };
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams();
+
+    if (selectedCategory !== "7") {
+      queryParams.append("category", selectedCategory);
+    } else {
+      queryParams.delete("category");
+    }
+
+    if (priceRange[0] !== 0 || priceRange[1] !== 10000) {
+      queryParams.append("minPrice", priceRange[0].toString());
+      queryParams.append("maxPrice", priceRange[1].toString());
+    }
+    // Add other filters as needed
+    if (selectedCompany) {
+      queryParams.append("company", selectedCompany);
+    }
+    if (debouncedSearchValue !== "") {
+      queryParams.append("name", debouncedSearchValue);
+    }
+    const queryString = queryParams.toString();
+    getFilteredValue?.(`products/filter/?${queryString}`);
+  }, [selectedCategory, priceRange, debouncedSearchValue, selectedCompany]);
 
   return (
     <div className="sticky top-20">
@@ -36,6 +99,9 @@ const FilterSection = () => {
             variant="outlined"
             size="small"
             className="w-full "
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
           />
         </div>
 
@@ -43,7 +109,14 @@ const FilterSection = () => {
           <h3 className="text-2xl text- m-1">Category</h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {categories.map((category) => (
-              <Button variant="contained" key={category}>
+              <Button
+                variant="contained"
+                size="small"
+                key={category}
+                onClick={() =>
+                  setSelectedCategory(CategoryEnum[category as number])
+                }
+              >
                 {category}
               </Button>
             ))}
@@ -53,15 +126,16 @@ const FilterSection = () => {
         <div>
           <div className="text-2xl text- m-1">Company</div>
           <Select
-            value={selectedCategory}
-            onChange={handleCategoryChange}
+            value={selectedCompany}
+            onChange={handleCompanyChange}
             displayEmpty
-            className="w-full size-10"
+            className="w-full"
+            size="small"
           >
             <MenuItem value="" disabled>
               Select Category
             </MenuItem>
-            {categories.map((category) => (
+            {company.map((category) => (
               <MenuItem key={category} value={category}>
                 {category}
               </MenuItem>
@@ -76,7 +150,7 @@ const FilterSection = () => {
             onChange={handlePriceChange}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
-            max={100}
+            max={10000}
             min={0}
             className="w-full"
           />

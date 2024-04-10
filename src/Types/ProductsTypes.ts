@@ -72,4 +72,6 @@ export interface ProductContext {
   review: ProductReview[];
   getSingleProduct?: (url: string) => Promise<void>;
   getProductReview?: (url: string) => Promise<void>;
+  filterProducts: Product[];
+  getFilteredValue?: (url: string) => Promise<void>;
 }
