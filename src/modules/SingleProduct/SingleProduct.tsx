@@ -6,12 +6,19 @@ import { useProductsContext } from "../../Context/ProductsContext";
 import { useEffect } from "react";
 
 const SingleProduct = () => {
-  const { getSingleProduct, singleProduct, isSingleLoading } =
-    useProductsContext();
+  const {
+    getSingleProduct,
+    getProductReview,
+    singleProduct,
+    isSingleLoading,
+    review,
+    isReviewLoading,
+  } = useProductsContext();
   const { id } = useParams();
 
   useEffect(() => {
-    getSingleProduct?.(`http://localhost:3000/products/${id}`);
+    getSingleProduct?.(`products/${id}`);
+    getProductReview?.(`review/${id}`);
   }, [id]);
 
   if (isSingleLoading) {
@@ -25,7 +32,11 @@ const SingleProduct = () => {
     <div>
       <NavigationPanel />
       <ProductView product={singleProduct} />
-      <ProductMoreInfo product={singleProduct} />
+      <ProductMoreInfo
+        product={singleProduct}
+        reviewData={review}
+        isReviewLoading={isReviewLoading}
+      />
     </div>
   );
 };

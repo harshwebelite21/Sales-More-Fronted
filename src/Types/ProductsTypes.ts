@@ -43,6 +43,15 @@ export interface Product {
   attributes: { name: string; value: string }[];
 }
 
+export interface ProductReview {
+  _id: string;
+  rating: number;
+  reviewText: string;
+  userName: string;
+  productName: string;
+  image: string;
+}
+
 export interface ProductsContextProviderProps {
   children: ReactNode;
 }
@@ -59,5 +68,8 @@ export interface ProductContext {
   featureProducts: Product[];
   isSingleLoading: boolean;
   singleProduct: Product;
+  isReviewLoading: boolean;
+  review: ProductReview[];
   getSingleProduct?: (url: string) => Promise<void>;
+  getProductReview?: (url: string) => Promise<void>;
 }
