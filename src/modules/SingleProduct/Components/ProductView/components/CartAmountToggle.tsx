@@ -1,17 +1,14 @@
 import { Button, ButtonGroup } from "@mui/material";
-import PropTypes from "prop-types";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-interface CartAmountToggleProps {
-  quantity: number;
-  increaseQuantity: () => void;
-  decreaseQuantity: () => void;
-}
-
-const CartAmountToggle: React.FC<CartAmountToggleProps> = ({
+const CartAmountToggle = ({
   quantity,
   increaseQuantity,
   decreaseQuantity,
+}: {
+  quantity: number;
+  increaseQuantity: () => void;
+  decreaseQuantity: () => void;
 }) => (
   <div className="flex-center">
     <ButtonGroup
@@ -50,7 +47,7 @@ const CartAmountToggle: React.FC<CartAmountToggleProps> = ({
           backgroundColor: "#e0ded8",
           color: "#111",
           "&:hover": {
-            backgroundColor: "#d1d0ca", // Change this color to your desired hover color
+            backgroundColor: "#d1d0ca",
           },
         }}
       >
@@ -59,11 +56,5 @@ const CartAmountToggle: React.FC<CartAmountToggleProps> = ({
     </ButtonGroup>
   </div>
 );
-
-CartAmountToggle.propTypes = {
-  quantity: PropTypes.number.isRequired,
-  increaseQuantity: PropTypes.func.isRequired,
-  decreaseQuantity: PropTypes.func.isRequired,
-};
 
 export default CartAmountToggle;

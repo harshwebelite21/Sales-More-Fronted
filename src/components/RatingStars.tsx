@@ -2,8 +2,14 @@ import { Box, Rating } from "@mui/material";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const RatingStars = ({ readOnly }: { readOnly: boolean }) => {
-  const [value, setValue] = useState<number | null>(2);
+const RatingStars = ({
+  readOnly,
+  stars,
+}: {
+  readOnly: boolean;
+  stars: number;
+}) => {
+  const [value, setValue] = useState<number | null>(stars);
 
   return (
     <Box>
