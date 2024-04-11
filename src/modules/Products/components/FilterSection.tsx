@@ -63,8 +63,6 @@ const FilterSection = () => {
   };
 
   const handleClearFilter = () => {
-    console.log("Hello Clear");
-
     setPriceRange([1, 10000]);
     setSelectedCategory("1");
     setSearchValue("");
@@ -105,7 +103,6 @@ const FilterSection = () => {
       queryParams.append("name", debouncedSearchValue);
     }
     const queryString = queryParams.toString();
-    console.log("🚀 ~ useEffect ~ queryString:", queryString);
     getFilteredValue?.(`products/filter/?${queryString}`);
   }, [selectedCategory, priceRange, debouncedSearchValue, selectedCompany]);
 
