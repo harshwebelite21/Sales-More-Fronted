@@ -27,17 +27,11 @@ const useDebounce = (value: string, delay: number) => {
   return debouncedValue;
 };
 
-const filterProductsByCompany = (products: Product[]): string[] => {
-  const companies: Set<string> = new Set();
-  products.forEach(({ company }) => companies.add(company));
-  return Array.from(companies);
-};
-
 const FilterSection = () => {
-  const { getFilteredValue, filterProducts } = useProductsContext();
+  const { getFilteredValue, products } = useProductsContext();
 
   // State variables
-  const [selectedCategory, setSelectedCategory] = useState("1");
+  const [selectedCategory, setSelectedCategory] = useState("7");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -48,7 +42,6 @@ const FilterSection = () => {
   const categories = Object.values(CategoryEnum).filter(
     (category) => typeof category === "string",
   );
-  const company = filterProductsByCompany(filterProducts);
 
   // Handlers
   const handleCompanyChange = (event: SelectChangeEvent<string>) => {
@@ -63,12 +56,31 @@ const FilterSection = () => {
     setIsFilterVisible(!isFilterVisible);
   };
 
+  const filterProductsByCompany = (
+    products: Product[],
+    selectedCategory: string,
+  ): string[] => {
+    const companies: Set<string> = new Set();
+    products.forEach((company) => {
+      if (selectedCategory === company.category) {
+        companies.add(company.company);
+      }
+    });
+    return Array.from(companies);
+  };
+
+  const company = filterProductsByCompany(products, selectedCategory);
+
   useEffect(() => {
     const queryParams = new URLSearchParams();
 
     if (selectedCategory !== "7") {
       queryParams.append("category", selectedCategory);
+      queryParams.delete("company");
     } else {
+      queryParams.delete("category");
+    }
+    if (selectedCategory === "7") {
       queryParams.delete("category");
     }
 
@@ -84,6 +96,7 @@ const FilterSection = () => {
       queryParams.append("name", debouncedSearchValue);
     }
     const queryString = queryParams.toString();
+    console.log("🚀 ~ useEffect ~ queryString:", queryString);
     getFilteredValue?.(`products/filter/?${queryString}`);
   }, [selectedCategory, priceRange, debouncedSearchValue, selectedCompany]);
 

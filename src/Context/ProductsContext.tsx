@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Product, ProductContext } from "../Types/ProductsTypes";
 import { get } from "../utils/axios";
+import appConfig from "../config/appConfig";
 
 const initialState: ProductContext = {
   isLoading: false,
@@ -14,7 +15,7 @@ const initialState: ProductContext = {
   filterProducts: [],
 };
 
-const authToken = process.env.AuthToken;
+const authToken = appConfig.authToken;
 
 export const ProductsContext = createContext<ProductContext>(initialState);
 
