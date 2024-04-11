@@ -70,4 +70,6 @@ export interface ProductContext {
   sortOrder: string;
   handleSort?: (order: string) => Promise<void>;
   itemsAvailable: number;
+  gridViewType: boolean;
+  handleViewType?: () => Promise<void>;
 }

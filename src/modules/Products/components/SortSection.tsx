@@ -5,25 +5,17 @@ import { useProductsContext } from "../../../Context/ProductsContext";
 import { SortEnum } from "../../../utils/enums";
 
 const SortSection = () => {
-  const [gridView, setGridView] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState("name");
   const sortOrder = Object.keys(SortEnum).filter(
     (category) => typeof category === "string",
   );
 
-  const { handleSort, itemsAvailable } = useProductsContext();
+  const { handleSort, itemsAvailable, handleViewType, gridViewType } =
+    useProductsContext();
 
   const handleOrderChange = (event: SelectChangeEvent<string>) => {
     handleSort?.(event.target.value.toLowerCase());
     setSelectedOrder(event.target.value.toLowerCase());
-  };
-
-  const handleGridViewClick = () => {
-    setGridView(true);
-  };
-
-  const handleListViewClick = () => {
-    setGridView(false);
   };
 
   return (
@@ -31,8 +23,8 @@ const SortSection = () => {
       <div className="hidden md:flex">
         <button
           aria-label="Toggle grid view"
-          className={`px-4 py-2 ${gridView ? "bg-gray-400" : "bg-white"} hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-l`}
-          onClick={handleGridViewClick}
+          className={`px-4 py-2 ${gridViewType ? "bg-gray-400" : "bg-white"} hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-l`}
+          onClick={handleViewType}
           type="button"
         >
           <BsFillGridFill className="text-2xl" />
@@ -41,8 +33,8 @@ const SortSection = () => {
         <button
           aria-label="Toggle List view"
           type="button"
-          className={`px-4 py-2 ${!gridView ? "bg-gray-400" : "bg-white"} hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-r`}
-          onClick={handleListViewClick}
+          className={`px-4 py-2 ${!gridViewType ? "bg-gray-400" : "bg-white"} hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-r`}
+          onClick={handleViewType}
         >
           <BsList className="text-2xl" />
         </button>

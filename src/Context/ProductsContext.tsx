@@ -15,6 +15,7 @@ const initialState: ProductContext = {
   filterProducts: [],
   sortOrder: "asc",
   itemsAvailable: 0,
+  gridViewType: true,
 };
 
 const authToken = appConfig.authToken;
@@ -146,6 +147,27 @@ export const ProductsContextProvider = ({
     }
   };
 
+  const handleViewType = async () => {
+    try {
+      setState((prevState) => ({
+        ...prevState,
+        isLoading: true,
+      }));
+
+      setState((prevState) => ({
+        ...prevState,
+        gridViewType: !state.gridViewType,
+        isLoading: false,
+      }));
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        isError: true,
+        isLoading: false,
+      }));
+    }
+  };
+
   const contextValue = useMemo(() => {
     const {
       products,
@@ -158,6 +180,7 @@ export const ProductsContextProvider = ({
       review,
       sortOrder,
       itemsAvailable,
+      gridViewType,
       filterProducts,
     } = state;
 
@@ -175,8 +198,10 @@ export const ProductsContextProvider = ({
       getSingleProduct,
       getProductReview,
       filterProducts,
+      gridViewType,
       getFilteredValue,
       handleSort,
+      handleViewType,
     };
   }, [state]);
 
