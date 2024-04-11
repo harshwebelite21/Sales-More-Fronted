@@ -67,4 +67,7 @@ export interface ProductContext {
   getProductReview?: (url: string) => Promise<void>;
   filterProducts: Product[];
   getFilteredValue?: (url: string) => Promise<void>;
+  sortOrder: string;
+  handleSort?: (order: string) => Promise<void>;
+  itemsAvailable: number;
 }

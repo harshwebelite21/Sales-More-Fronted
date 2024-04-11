@@ -13,6 +13,8 @@ const initialState: ProductContext = {
   isReviewLoading: false,
   review: [],
   filterProducts: [],
+  sortOrder: "asc",
+  itemsAvailable: 0,
 };
 
 const authToken = appConfig.authToken;
@@ -113,6 +115,26 @@ export const ProductsContextProvider = ({
       setState((prevState) => ({
         ...prevState,
         filterProducts: filterProducts,
+        itemsAvailable: Object.keys(filterProducts).length,
+        isLoading: false,
+      }));
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        isError: true,
+        isLoading: false,
+      }));
+    }
+  };
+  const handleSort = async (order: string) => {
+    try {
+      setState((prevState) => ({
+        ...prevState,
+        isLoading: true,
+      }));
+      setState((prevState) => ({
+        ...prevState,
+        sortOrder: order,
         isLoading: false,
       }));
     } catch (error) {
@@ -134,6 +156,8 @@ export const ProductsContextProvider = ({
       singleProduct,
       isReviewLoading,
       review,
+      sortOrder,
+      itemsAvailable,
       filterProducts,
     } = state;
 
@@ -146,10 +170,13 @@ export const ProductsContextProvider = ({
       singleProduct,
       isReviewLoading,
       review,
+      itemsAvailable,
+      sortOrder,
       getSingleProduct,
       getProductReview,
       filterProducts,
       getFilteredValue,
+      handleSort,
     };
   }, [state]);
 
