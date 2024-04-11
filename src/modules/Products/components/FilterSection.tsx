@@ -33,7 +33,7 @@ const FilterSection = () => {
 
   // State variables
   const [selectedCategory, setSelectedCategory] = useState("1");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([1, 10000]);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearchValue = useDebounce(searchValue, 1000);
@@ -65,7 +65,7 @@ const FilterSection = () => {
   const handleClearFilter = () => {
     console.log("Hello Clear");
 
-    setPriceRange([0, 10000]);
+    setPriceRange([1, 10000]);
     setSelectedCategory("1");
     setSearchValue("");
     setSelectedCompany("");
@@ -171,7 +171,7 @@ const FilterSection = () => {
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
             max={10000}
-            min={0}
+            min={1}
             className="w-full"
           />
         </div>
