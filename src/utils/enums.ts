@@ -7,3 +7,8 @@ export enum CategoryEnum {
   Outdoors,
   Clothing,
 }
+
+export enum SortEnum {
+  NAME = "name",
+  PRICE = "price",
+}

@@ -1,14 +1,21 @@
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 import { BsFillGridFill, BsList } from "react-icons/bs";
+import { useProductsContext } from "../../../Context/ProductsContext";
+import { SortEnum } from "../../../utils/enums";
 
 const SortSection = () => {
   const [gridView, setGridView] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const categories = ["All", "jgs", "fgd", "dfv"];
+  const [selectedOrder, setSelectedOrder] = useState("name");
+  const sortOrder = Object.keys(SortEnum).filter(
+    (category) => typeof category === "string",
+  );
 
-  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
-    setSelectedCategory(event.target.value);
+  const { handleSort, itemsAvailable } = useProductsContext();
+
+  const handleOrderChange = (event: SelectChangeEvent<string>) => {
+    handleSort?.(event.target.value.toLowerCase());
+    setSelectedOrder(event.target.value.toLowerCase());
   };
 
   const handleGridViewClick = () => {
@@ -41,11 +48,11 @@ const SortSection = () => {
         </button>
       </div>
 
-      <div>12 Products Available</div>
+      <div>{itemsAvailable} Products Available</div>
 
       <Select
-        value={selectedCategory}
-        onChange={handleCategoryChange}
+        value={selectedOrder}
+        onChange={handleOrderChange}
         displayEmpty
         className="w-full"
         size="small"
@@ -53,9 +60,9 @@ const SortSection = () => {
         <MenuItem value="" disabled>
           Select Category
         </MenuItem>
-        {categories.map((category) => (
-          <MenuItem key={category} value={category}>
-            {category}
+        {sortOrder.map((order) => (
+          <MenuItem key={order} value={order}>
+            {order}
           </MenuItem>
         ))}
       </Select>

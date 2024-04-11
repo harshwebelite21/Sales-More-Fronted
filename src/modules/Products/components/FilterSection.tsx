@@ -29,7 +29,7 @@ const useDebounce = (value: string, delay: number) => {
 };
 
 const FilterSection = () => {
-  const { getFilteredValue, products } = useProductsContext();
+  const { getFilteredValue, products, sortOrder } = useProductsContext();
 
   // State variables
   const [selectedCategory, setSelectedCategory] = useState("1");
@@ -102,10 +102,19 @@ const FilterSection = () => {
     if (debouncedSearchValue !== "") {
       queryParams.append("name", debouncedSearchValue);
     }
+
+    if (sortOrder) {
+      queryParams.append("sortBy", sortOrder);
+    }
     const queryString = queryParams.toString();
-    console.log("🚀 ~ useEffect ~ queryString:", queryString);
     getFilteredValue?.(`products/filter/?${queryString}`);
-  }, [selectedCategory, priceRange, debouncedSearchValue, selectedCompany]);
+  }, [
+    selectedCategory,
+    priceRange,
+    debouncedSearchValue,
+    selectedCompany,
+    sortOrder,
+  ]);
 
   return (
     <div className="sticky top-20 ">
