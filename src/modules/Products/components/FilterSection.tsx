@@ -33,7 +33,7 @@ const FilterSection = () => {
 
   // State variables
   const [selectedCategory, setSelectedCategory] = useState("1");
-  const [priceRange, setPriceRange] = useState<[number, number]>([1, 10000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([1, 100000]);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearchValue = useDebounce(searchValue, 1000);
@@ -91,7 +91,7 @@ const FilterSection = () => {
       queryParams.append("category", selectedCategory);
     }
 
-    if (priceRange[0] !== 0 || priceRange[1] !== 10000) {
+    if (priceRange[0] !== 0 || priceRange[1] !== 100000) {
       queryParams.append("minPrice", priceRange[0].toString());
       queryParams.append("maxPrice", priceRange[1].toString());
     }
@@ -103,6 +103,7 @@ const FilterSection = () => {
       queryParams.append("name", debouncedSearchValue);
     }
     const queryString = queryParams.toString();
+    console.log("🚀 ~ useEffect ~ queryString:", queryString);
     getFilteredValue?.(`products/filter/?${queryString}`);
   }, [selectedCategory, priceRange, debouncedSearchValue, selectedCompany]);
 
