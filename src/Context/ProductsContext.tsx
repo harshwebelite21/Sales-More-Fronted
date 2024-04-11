@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Product, ProductContext } from "../Types/ProductsTypes";
 import { get } from "../utils/axios";
+import appConfig from "../config/appConfig";
 
 const initialState: ProductContext = {
   isLoading: false,
@@ -11,10 +12,10 @@ const initialState: ProductContext = {
   singleProduct: {} as Product,
   isReviewLoading: false,
   review: [],
+  filterProducts: [],
 };
 
-const authToken =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWNiNTk0MjM3ZWNhY2UzNjgyNzE4OTEiLCJyb2xlIjoxLCJpYXQiOjE3MTI3MjM3OTEsImV4cCI6MTcxMjgxMDE5MX0.J6-ONbwBw-BTYjJeLPhVZU9_CYVHim2MpCMgYfdbSWQ";
+const authToken = appConfig.authToken;
 
 export const ProductsContext = createContext<ProductContext>(initialState);
 
@@ -39,6 +40,7 @@ export const ProductsContextProvider = ({
         ...prevState,
         products,
         featureProducts,
+        filterProducts: products,
         isLoading: false,
       }));
     } catch (error) {
@@ -98,6 +100,29 @@ export const ProductsContextProvider = ({
       }));
     }
   };
+  const getFilteredValue = async (url: string) => {
+    try {
+      setState((prevState) => ({
+        ...prevState,
+        isLoading: true,
+      }));
+
+      const res = await get(url);
+      const filterProducts = await res.data;
+
+      setState((prevState) => ({
+        ...prevState,
+        filterProducts: filterProducts,
+        isLoading: false,
+      }));
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        isError: true,
+        isLoading: false,
+      }));
+    }
+  };
 
   const contextValue = useMemo(() => {
     const {
@@ -109,6 +134,7 @@ export const ProductsContextProvider = ({
       singleProduct,
       isReviewLoading,
       review,
+      filterProducts,
     } = state;
 
     return {
@@ -122,6 +148,8 @@ export const ProductsContextProvider = ({
       review,
       getSingleProduct,
       getProductReview,
+      filterProducts,
+      getFilteredValue,
     };
   }, [state]);
 

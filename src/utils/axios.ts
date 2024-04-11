@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import appConfig from "../config/appConfig";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: appConfig.baseUrl,
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",

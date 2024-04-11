@@ -1,12 +1,5 @@
 import { ReactNode } from "react";
 
-export enum CategoryEnum {
-  Clothing = 1,
-  Electronics,
-  HomeAndFurniture,
-  SportsAndOutdoors,
-}
-
 export interface ProductsContextType {
   products: {
     _id: string;
@@ -14,7 +7,7 @@ export interface ProductsContextType {
     description: string;
     price: number;
     availableQuantity: number;
-    category: CategoryEnum;
+    category: string;
     images: string[];
     image?: string;
     company?: string;
@@ -32,7 +25,7 @@ export interface Product {
   description: string;
   price: number;
   availableQuantity: number;
-  category: CategoryEnum;
+  category: string;
   images: string[];
   image: string;
   company: string;
@@ -72,4 +65,6 @@ export interface ProductContext {
   review: ProductReview[];
   getSingleProduct?: (url: string) => Promise<void>;
   getProductReview?: (url: string) => Promise<void>;
+  filterProducts: Product[];
+  getFilteredValue?: (url: string) => Promise<void>;
 }
