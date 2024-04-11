@@ -11,7 +11,11 @@ const ProductsList = ({ products }: { products: Product[] }) => {
         <div className="w-full my-5 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {products?.map((product: Product) => {
             return (
-              <div key={product._id} className="border p-4 rounded-lg">
+              <Link
+                to={`${product._id}`}
+                key={product._id}
+                className="border p-4 rounded-lg"
+              >
                 <img
                   src={product?.images?.at(0)}
                   alt={product.name}
@@ -24,12 +28,10 @@ const ProductsList = ({ products }: { products: Product[] }) => {
                   {product.description}
                 </p>
                 <p className="text-lg font-bold mb-2">{product.price}</p>
-                <Link to={`${product._id}`}>
-                  <Button variant="contained" color="primary">
-                    View Product
-                  </Button>
-                </Link>
-              </div>
+                <Button variant="contained" color="primary">
+                  View Product
+                </Button>
+              </Link>
             );
           })}
         </div>

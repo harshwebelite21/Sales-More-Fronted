@@ -6,6 +6,7 @@ import {
   TextField,
   Slider,
   SelectChangeEvent,
+  FormControl,
 } from "@mui/material";
 import { useProductsContext } from "../../../Context/ProductsContext";
 import { CategoryEnum } from "../../../utils/enums";
@@ -31,7 +32,7 @@ const FilterSection = () => {
   const { getFilteredValue, products } = useProductsContext();
 
   // State variables
-  const [selectedCategory, setSelectedCategory] = useState("7");
+  const [selectedCategory, setSelectedCategory] = useState("1");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -48,6 +49,11 @@ const FilterSection = () => {
     setSelectedCompany(event.target.value);
   };
 
+  const handleCategoryChange = (category: keyof typeof CategoryEnum) => {
+    setSelectedCategory(CategoryEnum[category] as unknown as string);
+    setSelectedCompany("");
+  };
+
   const handlePriceChange = (_event: Event, newValue: number | number[]) => {
     setPriceRange(newValue as [number, number]);
   };
@@ -56,13 +62,22 @@ const FilterSection = () => {
     setIsFilterVisible(!isFilterVisible);
   };
 
+  const handleClearFilter = () => {
+    console.log("Hello Clear");
+
+    setPriceRange([0, 10000]);
+    setSelectedCategory("1");
+    setSearchValue("");
+    setSelectedCompany("");
+  };
+
   const filterProductsByCompany = (
     products: Product[],
     selectedCategory: string,
   ): string[] => {
     const companies: Set<string> = new Set();
     products.forEach((company) => {
-      if (selectedCategory === company.category) {
+      if (selectedCategory === company.category || selectedCategory == "1") {
         companies.add(company.company);
       }
     });
@@ -76,12 +91,6 @@ const FilterSection = () => {
 
     if (selectedCategory !== "7") {
       queryParams.append("category", selectedCategory);
-      queryParams.delete("company");
-    } else {
-      queryParams.delete("category");
-    }
-    if (selectedCategory === "7") {
-      queryParams.delete("category");
     }
 
     if (priceRange[0] !== 0 || priceRange[1] !== 10000) {
@@ -101,7 +110,7 @@ const FilterSection = () => {
   }, [selectedCategory, priceRange, debouncedSearchValue, selectedCompany]);
 
   return (
-    <div className="sticky top-20">
+    <div className="sticky top-20 ">
       <div
         className={`flex flex-col gap-8 w-full h-fit md:border-r-2 border-gray-200  md:my-5  md:pl-0 p-5  ${isFilterVisible ? "block" : "hidden md:block"}`}
       >
@@ -127,7 +136,7 @@ const FilterSection = () => {
                 size="small"
                 key={category}
                 onClick={() =>
-                  setSelectedCategory(CategoryEnum[category as number])
+                  handleCategoryChange(category as keyof typeof CategoryEnum)
                 }
               >
                 {category}
@@ -138,22 +147,20 @@ const FilterSection = () => {
 
         <div>
           <div className="text-2xl text- m-1">Company</div>
-          <Select
-            value={selectedCompany}
-            onChange={handleCompanyChange}
-            displayEmpty
-            className="w-full"
-            size="small"
-          >
-            <MenuItem value="" disabled>
-              Select Category
-            </MenuItem>
-            {company.map((category) => (
-              <MenuItem key={category} value={category}>
-                {category}
-              </MenuItem>
-            ))}
-          </Select>
+          <FormControl fullWidth>
+            <Select
+              value={selectedCompany}
+              onChange={handleCompanyChange}
+              variant="outlined"
+              size="small"
+            >
+              {company.map((category) => (
+                <MenuItem key={category} value={category}>
+                  {category}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
 
         <div>
@@ -170,7 +177,12 @@ const FilterSection = () => {
         </div>
 
         <div>
-          <Button variant="contained" color="secondary" className="w-full">
+          <Button
+            variant="contained"
+            color="secondary"
+            className="w-full"
+            onClick={() => handleClearFilter()}
+          >
             Clear Filters
           </Button>
         </div>
