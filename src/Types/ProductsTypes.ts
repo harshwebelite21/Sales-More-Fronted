@@ -83,6 +83,7 @@ export interface CartItemType {
   image: string;
   availableQuantity: number;
   size: string;
+  subTotal?: number;
 }
 export interface CartContextType {
   cart: CartItemType[];

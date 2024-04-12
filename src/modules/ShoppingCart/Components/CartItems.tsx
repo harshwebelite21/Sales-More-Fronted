@@ -53,7 +53,9 @@ const CartItems = ({ cart }: { cart: CartItemType[] }) => {
                   />
                 </div>
               </div>
-              <div className="flex-center text-[#46c832] ">₹1000</div>
+              <div className="flex-center text-[#46c832] ">
+                ₹{product.subTotal}
+              </div>
 
               <div
                 className="flex-center cursor-pointer "
