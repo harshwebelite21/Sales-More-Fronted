@@ -1,9 +1,16 @@
 import { useState } from "react";
-const SizeSelection = ({ sizes }: { sizes: string[] }) => {
-  const [selectedSize, setSelectedColor] = useState(sizes?.at(0));
+const SizeSelection = ({
+  sizes,
+  handleSizeSelection,
+}: {
+  sizes: string[];
+  handleSizeSelection: (size: string) => void;
+}) => {
+  const [selectedSize, setSelectedSize] = useState(sizes?.at(0));
 
   const handleClick = (size: string) => {
-    setSelectedColor(size);
+    setSelectedSize(size);
+    handleSizeSelection(size);
   };
 
   return (

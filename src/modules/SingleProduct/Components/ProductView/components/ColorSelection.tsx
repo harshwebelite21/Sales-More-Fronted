@@ -1,11 +1,18 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const ColorSelection = ({ colors }: { colors: string[] }) => {
+const ColorSelection = ({
+  colors,
+  onColorChange,
+}: {
+  colors: string[];
+  onColorChange: (color: string) => void;
+}) => {
   const [selectedColor, setSelectedColor] = useState(colors?.at(0));
 
   const handleClick = (color: string) => {
     setSelectedColor(color);
+    onColorChange(color);
   };
 
   return (

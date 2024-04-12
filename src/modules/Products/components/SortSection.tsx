@@ -2,13 +2,15 @@ import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 import { BsFillGridFill, BsList } from "react-icons/bs";
 import { useProductsContext } from "../../../Context/ProductsContext";
-import { SortEnum } from "../../../utils/enums";
+// import { SortEnum } from "../../../utils/enums";
 
 const SortSection = () => {
   const [selectedOrder, setSelectedOrder] = useState("name");
-  const sortOrder = Object.keys(SortEnum).filter(
-    (category) => typeof category === "string",
-  );
+  // const sortOrder = Object.keys(SortEnum).filter(
+  //   (category) => typeof category === "string",
+  // );
+
+  const sortOrder = ["name", "price"];
 
   const { handleSort, itemsAvailable, handleViewType, gridViewType } =
     useProductsContext();

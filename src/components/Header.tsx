@@ -4,16 +4,27 @@ import { FiShoppingCart } from "react-icons/fi";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import { MenuItem } from "../utils/types";
+import { Badge } from "@mui/material";
+import { useCartContext } from "../Context/CartContext";
 
 const Header: React.FC = () => {
   const [click, setClick] = useState(false);
+
+  const { cartLength } = useCartContext();
 
   const menuItems: MenuItem[] = [
     { to: "/", label: "Home" },
     { to: "/about", label: "About" },
     { to: "/products", label: "Products" },
     { to: "/contact", label: "Contact" },
-    { to: "/cart", label: <FiShoppingCart className="size-8" /> },
+    {
+      to: "/cart",
+      label: (
+        <Badge badgeContent={cartLength} color="primary" max={9}>
+          <FiShoppingCart color="action" className="size-8" />
+        </Badge>
+      ),
+    },
   ];
   const handleMenuClick = () => {
     setClick(!click);
@@ -73,14 +84,7 @@ const Header: React.FC = () => {
                     key={menuItem.to}
                     onClick={handleMenuClick}
                   >
-                    <li
-                      className={`cursor-pointer my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded ${
-                        typeof menuItem.label === "object" &&
-                        menuItem.label.type === FiShoppingCart
-                          ? "flex justify-center"
-                          : ""
-                      }`}
-                    >
+                    <li className="cursor-pointer my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded ">
                       {menuItem.label}
                     </li>
                   </Link>
