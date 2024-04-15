@@ -1,5 +1,4 @@
 import { useCartContext } from "../../Context/CartContext";
-import CartButtons from "./Components/CartButtons";
 import CartCalculations from "./Components/CartCalculations";
 import CartItems from "./Components/CartItems";
 import CartMobileItems from "./Components/CartMobileItems";
@@ -13,9 +12,6 @@ const ShoppingCart = () => {
         <div className="w-full my-4 h-auto max-h-[500px] overflow-y-auto">
           <CartItems cart={cart} />
         </div>
-        <div className="w-full my-4">
-          <CartButtons />
-        </div>
         <div className="w-full flex justify-end my-4">
           <CartCalculations />
         </div>
@@ -23,9 +19,6 @@ const ShoppingCart = () => {
       <div className="md:hidden flex-col">
         <div className="w-[90%] mx-auto my-4">
           <CartMobileItems cart={cart} />
-        </div>
-        <div className="w-[90%] mx-auto my-4">
-          <CartButtons />
         </div>
         <div className="w-[90%] mx-auto my-4">
           <CartCalculations />

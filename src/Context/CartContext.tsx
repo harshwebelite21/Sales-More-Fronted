@@ -156,6 +156,18 @@ export const CartContextProvider = ({
     }
   };
 
+  const removeCoupon = (coupon: string) => {
+    if (coupon === state.appliedCouponValue) {
+      setState((prevState) => ({
+        ...prevState,
+        couponApplied: false,
+        appliedCouponValue: "",
+        orderTotal: prevState.orderTotal - prevState.reductionValue,
+        reductionValue: 0,
+      }));
+    }
+  };
+
   useEffect(() => {
     localStorage.setItem("cartState", JSON.stringify(state));
     cartLength();
@@ -189,6 +201,7 @@ export const CartContextProvider = ({
       reductionValue,
       couponApplied,
       appliedCouponValue,
+      removeCoupon,
     };
   }, [state]);
 
