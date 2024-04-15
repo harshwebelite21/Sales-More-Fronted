@@ -59,22 +59,27 @@ const ProductDetails = ({ product }: { product: Product }) => {
       </div>
       <div className="text-sm font-sans">{description}</div>
 
-      <div className="flex flex-col">
-        <div className="text-sm text-[#9F9F9F] font-semibold">Size</div>
-        <div>
-          <SizeSelection
-            sizes={sizes}
-            handleSizeSelection={handleSizeSelection}
-          />
+      {Boolean(sizes?.length) && (
+        <div className="flex flex-col">
+          <div className="text-sm text-[#9F9F9F] font-semibold">Size</div>
+          <div>
+            <SizeSelection
+              sizes={sizes}
+              handleSizeSelection={handleSizeSelection}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="flex flex-col">
-        <div className="text-sm font-semibold text-[#9F9F9F] ">Color</div>
-        <div>
-          <ColorSelection colors={colors} onColorChange={handleColorChange} />
+      {Boolean(colors?.length) && (
+        <div className="flex flex-col">
+          <div className="text-sm font-semibold text-[#9F9F9F] ">Color</div>
+          <div>
+            <ColorSelection colors={colors} onColorChange={handleColorChange} />
+          </div>
         </div>
-      </div>
+      )}
+
       <div className="grid grid-cols-3 gap-7 h-[50px]">
         <CartAmountToggle
           mQuantity={quantity}

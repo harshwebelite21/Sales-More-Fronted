@@ -43,6 +43,9 @@ export const CartContextProvider = ({
     if (existingItemIndex !== -1) {
       const updatedCart = [...state.cart];
       updatedCart[existingItemIndex].quantity += quantity;
+      updatedCart[existingItemIndex].subTotal =
+        updatedCart[existingItemIndex].price *
+        updatedCart[existingItemIndex].quantity;
       setState((prevState) => ({
         ...prevState,
         cart: updatedCart,
@@ -57,6 +60,7 @@ export const CartContextProvider = ({
         price: price,
         availableQuantity: availableQuantity,
         size: size,
+        subTotal: quantity * price,
       };
 
       setState((prevState) => ({
@@ -72,6 +76,9 @@ export const CartContextProvider = ({
     if (existingItemIndex !== -1) {
       const updatedCart = [...state.cart];
       updatedCart[existingItemIndex].quantity += 1;
+      updatedCart[existingItemIndex].subTotal =
+        updatedCart[existingItemIndex].price *
+        updatedCart[existingItemIndex].quantity;
       setState((prevState) => ({
         ...prevState,
         cart: updatedCart,
@@ -85,6 +92,9 @@ export const CartContextProvider = ({
     if (existingItemIndex !== -1) {
       const updatedCart = [...state.cart];
       updatedCart[existingItemIndex].quantity -= 1;
+      updatedCart[existingItemIndex].subTotal =
+        updatedCart[existingItemIndex].price *
+        updatedCart[existingItemIndex].quantity;
       setState((prevState) => ({
         ...prevState,
         cart: updatedCart,
@@ -146,6 +156,18 @@ export const CartContextProvider = ({
     }
   };
 
+  const removeCoupon = (coupon: string) => {
+    if (coupon === state.appliedCouponValue) {
+      setState((prevState) => ({
+        ...prevState,
+        couponApplied: false,
+        appliedCouponValue: "",
+        orderTotal: prevState.orderTotal - prevState.reductionValue,
+        reductionValue: 0,
+      }));
+    }
+  };
+
   useEffect(() => {
     localStorage.setItem("cartState", JSON.stringify(state));
     cartLength();
@@ -179,6 +201,7 @@ export const CartContextProvider = ({
       reductionValue,
       couponApplied,
       appliedCouponValue,
+      removeCoupon,
     };
   }, [state]);
 

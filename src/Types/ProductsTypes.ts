@@ -83,6 +83,7 @@ export interface CartItemType {
   image: string;
   availableQuantity: number;
   size: string;
+  subTotal?: number;
 }
 export interface CartContextType {
   cart: CartItemType[];
@@ -106,6 +107,7 @@ export interface CartContextType {
   orderTotal: number;
   couponApplied?: boolean;
   applyCoupon?: (coupon: string) => void;
-  appliedCouponValue?: string;
-  reductionValue?: number;
+  appliedCouponValue: string;
+  reductionValue: number;
+  removeCoupon?: (coupon: string) => void;
 }
