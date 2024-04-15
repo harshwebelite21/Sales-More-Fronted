@@ -104,8 +104,6 @@ const ProductDetails = ({ product }: { product: Product }) => {
             sx={{
               margin: "10px",
               fontFamily: "inherit",
-              paddingInline: "55px",
-
               fontWeight: "bold",
               backgroundColor: "black",
               color: "white",
@@ -125,7 +123,6 @@ const ProductDetails = ({ product }: { product: Product }) => {
           className="whitespace-nowrap"
           sx={{
             margin: "10px",
-            paddingInline: "50px",
             fontFamily: "inherit",
             fontWeight: "bold",
             backgroundColor: "black",

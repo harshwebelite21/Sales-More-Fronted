@@ -26,7 +26,7 @@ const CartItems = ({ cart }: { cart: CartItemType[] }) => {
                   <img
                     src={product.image}
                     alt={product.image}
-                    className="size-28 rounded-md"
+                    className="rounded-md"
                   />
                 </div>
 
