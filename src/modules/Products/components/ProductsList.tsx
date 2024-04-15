@@ -50,7 +50,7 @@ const ProductsList = ({ products }: { products: Product[] }) => {
                     alt={product.name}
                     className="w-1/3 h-auto object-cover rounded-lg mr-4"
                   />
-                  <div className="flex flex-col justify-between">
+                  <div className="flex flex-col">
                     <div>
                       <h2 className="text-lg font-semibold mb-2 line-clamp-2">
                         {product.name}

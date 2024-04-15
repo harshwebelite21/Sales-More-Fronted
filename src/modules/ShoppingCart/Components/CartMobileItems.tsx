@@ -7,36 +7,30 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-
-import "./Style/cartMobile.css";
-import { FaCircle } from "react-icons/fa";
+import "./Style/cartMobile.css"; // Make sure to keep only necessary custom styles
+import { FaCircle, FaTrash } from "react-icons/fa";
 import CartAmountToggle from "../../SingleProduct/Components/ProductView/components/CartAmountToggle";
-import { useState } from "react";
-import { useProductsContext } from "../../../Context/ProductsContext";
-import { Product } from "../../../Types/ProductsTypes";
+import { CartItemType } from "../../../Types/ProductsTypes";
+import { useCartContext } from "../../../Context/CartContext";
 
-const CartMobileItems = () => {
-  const [quantity, setQuantity] = useState(1);
-  const { products } = useProductsContext();
+const CartMobileItems = ({ cart }: { cart: CartItemType[] }) => {
+  const handleQuantityChange = () => {};
 
-  const increaseQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
-
-  const decreaseQuantity = () => {
-    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
-  };
+  const { removeItemFromCart } = useCartContext();
 
   return (
-    <div className=" rounded-md flex flex-col gap-3">
+    <div className="rounded-md flex flex-col gap-3">
       <Button
-        size="small"
+        variant="outlined"
+        size="medium"
+        className="h-10 bg-[#ff9900]"
         sx={{
-          margin: "10px",
+          paddingInline: "35px",
+          backgroundColor: "#ff9900",
+          borderColor: "#ff9900",
+          color: "black",
           fontFamily: "inherit",
           fontWeight: "bold",
-          color: "black",
-          borderColor: "#ff9900",
           "&:hover": {
             backgroundColor: "#ffaa00",
             borderColor: "#ffaa00",
@@ -46,86 +40,56 @@ const CartMobileItems = () => {
         Proceed To Buy
       </Button>
       <hr className="border-t-2" />
-      {products.map((product: Product) => {
-        return (
-          <Card key={product._id} sx={{ backgroundColor: "#f2f2f5" }}>
-            <Box className="flex flex-row w-full" sx={{ display: "flex" }}>
-              <div className="relative w-[50%] rounded-l m-[7px] overflow-hidden ">
-                <CardMedia
-                  component="img"
-                  height="194"
-                  image={product.image}
-                  alt="Paella dish"
-                />
-                <Typography className="ribbon">
-                  &nbsp; Best Seller &nbsp;{" "}
-                </Typography>
-              </div>
-              <CardContent
-                sx={{
-                  width: "50%",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "7px",
-                }}
-              >
-                <Typography className="max-w-md">
-                  <h1 className="text-lg font-bold break-words">
-                    {product.name}
-                  </h1>
-                </Typography>
-                <Typography className="flex flex-row gap-6 justify-start items-center ">
-                  <div className="text-xl font-bold">$299&apos;</div>
-                  <div className="text-md text-blue-500">prime</div>
-                </Typography>
-                <Typography className="flex items-center">
-                  <span className="pr-1">Color : </span>
-                  <span>
-                    <FaCircle color="blue" />
-                  </span>
-                </Typography>
-                <Typography className="text-sm text-green-600">
-                  in Stock
-                </Typography>
-                <Typography className="grid grid-cols-5 text-sm gap-12 items-center ">
-                  <div className="col-span-1 whitespace-nowrap">Size :</div>
-                  <div className="text-sm tracking-wider">1kg(Pack Of 1)</div>
-                  <div className="col-span-4">
-                    <h1 className="text-sm break-words whitespace-nowrap">
-                      1kg(Pack Of 1)
-                    </h1>
-                  </div>
-                </Typography>
-              </CardContent>
-            </Box>
-            <CardActions
-              className="w-full flex gap-5 "
-              sx={{ paddingInline: "20px" }}
-            >
-              <CartAmountToggle
-                quantity={quantity}
-                increaseQuantity={increaseQuantity}
-                decreaseQuantity={decreaseQuantity}
+      {cart.map((product: CartItemType) => (
+        <Card key={product.id} sx={{ backgroundColor: "#f2f2f5" }}>
+          <Box className="flex flex-row w-full">
+            <div className="relative w-1/2 rounded-l m-2 overflow-hidden">
+              <CardMedia
+                component="img"
+                height="194"
+                image={product.image}
+                alt="Product"
               />
-
-              <Button
-                size="small"
-                sx={{
-                  backgroundColor: "#ff9900",
-                  color: "#fff",
-                  borderColor: "#ff9900",
-                  "&:hover": {
-                    backgroundColor: "#ffaa00",
-                    borderColor: "#ffaa00",
-                  },
-                }}
-              >
-                Delete
-              </Button>
-            </CardActions>
-          </Card>
-        );
-      })}
+              <Typography className="ribbon">Best Seller</Typography>
+            </div>
+            <CardContent className="w-1/2 flex flex-col justify-center p-2 gap-1">
+              <Typography variant="h6" component="div">
+                {product.name}
+              </Typography>
+              <div className="flex gap-6 items-center">
+                <Typography variant="body1" className="font-bold">
+                  $299
+                </Typography>
+                <Typography className="text-blue-500">prime</Typography>
+              </div>
+              <div className="flex items-center gap-2">
+                <Typography component="span">Color:</Typography>
+                <FaCircle color={product.selectedColor} />
+              </div>
+              <Typography className="text-green-600">in Stock</Typography>
+              {product.size ? (
+                <div className="flex items-center gap-2">
+                  <Typography>Size:</Typography>
+                  <Typography>{product.size}</Typography>
+                </div>
+              ) : null}
+            </CardContent>
+          </Box>
+          <CardActions className="flex justify-around p-4">
+            <CartAmountToggle
+              mQuantity={product.quantity}
+              handleQuantity={handleQuantityChange}
+              id={product.id}
+            />
+            <div
+              className="flex-center cursor-pointer "
+              onClick={() => removeItemFromCart?.(product.id)}
+            >
+              <FaTrash className="text-red-500" />
+            </div>
+          </CardActions>
+        </Card>
+      ))}
       <hr className="my-4 border-t-2" />
     </div>
   );

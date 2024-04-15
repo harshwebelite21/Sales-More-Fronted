@@ -73,3 +73,39 @@ export interface ProductContext {
   gridViewType: boolean;
   handleViewType?: () => Promise<void>;
 }
+
+export interface CartItemType {
+  id: string;
+  name: string;
+  quantity: number;
+  price: number;
+  selectedColor: string;
+  image: string;
+  availableQuantity: number;
+  size: string;
+}
+export interface CartContextType {
+  cart: CartItemType[];
+  cartLength: number;
+  addToCart?: (
+    _id: string,
+    name: string,
+    quantity: number,
+    price: number,
+    selectedColor: string,
+    image: string,
+    availableQuantity: number,
+    size: string,
+  ) => void;
+  increaseCartQuantity?: (id: string) => void;
+  decreaseCartQuantity?: (id: string) => void;
+  removeItemFromCart?: (id: string) => void;
+  clearCart?: () => void;
+  subTotal: number;
+  shippingFee: number;
+  orderTotal: number;
+  couponApplied?: boolean;
+  applyCoupon?: (coupon: string) => void;
+  appliedCouponValue?: string;
+  reductionValue?: number;
+}

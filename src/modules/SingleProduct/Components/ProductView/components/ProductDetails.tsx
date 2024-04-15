@@ -1,13 +1,17 @@
 import { useState } from "react";
 import ColorSelection from "./ColorSelection";
-import CartAmountToggle from "./CartAmountToggle";
 import SizeSelection from "./SizeSelection";
 import { FaHeart } from "react-icons/fa";
 import { Button } from "@mui/material";
 import RatingStars from "../../../../../components/RatingStars";
 import { Product } from "../../../../../Types/ProductsTypes";
+import { useCartContext } from "../../../../../Context/CartContext";
+import { Link } from "react-router-dom";
+import CartAmountToggle from "./CartAmountToggle";
 
 const ProductDetails = ({ product }: { product: Product }) => {
+  const { addToCart } = useCartContext();
+
   const socialMediaLinks = [
     { url: "https://facebook.com", iconClass: "fab fa-facebook-f" },
     { url: "https://twitter.com", iconClass: "fab fa-twitter" },
@@ -15,15 +19,33 @@ const ProductDetails = ({ product }: { product: Product }) => {
     { url: "https://linkedin.com", iconClass: "fab fa-linkedin-in" },
   ];
 
-  const { name, price, description, colors, stars, sizes } = product;
+  const {
+    _id,
+    name,
+    price,
+    description,
+    colors,
+    stars,
+    sizes,
+    availableQuantity,
+    images,
+  } = product;
   const [quantity, setQuantity] = useState(1);
   const [addToWishList, setAddToWishList] = useState(false);
-  const increaseQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
+  let selectedSize: string;
 
-  const decreaseQuantity = () => {
-    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
+  const [selectedColor, setSelectedColor] = useState<string>(
+    colors?.at(0) as string,
+  );
+
+  const handleSizeSelection = (size: string) => {
+    selectedSize = size;
+  };
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color);
+  };
+  const handleQuantityChange = (que: number) => {
+    setQuantity(que);
   };
 
   return (
@@ -40,42 +62,59 @@ const ProductDetails = ({ product }: { product: Product }) => {
       <div className="flex flex-col">
         <div className="text-sm text-[#9F9F9F] font-semibold">Size</div>
         <div>
-          <SizeSelection sizes={sizes} />
+          <SizeSelection
+            sizes={sizes}
+            handleSizeSelection={handleSizeSelection}
+          />
         </div>
       </div>
 
       <div className="flex flex-col">
         <div className="text-sm font-semibold text-[#9F9F9F] ">Color</div>
         <div>
-          <ColorSelection colors={colors} />
+          <ColorSelection colors={colors} onColorChange={handleColorChange} />
         </div>
       </div>
       <div className="grid grid-cols-3 gap-7 h-[50px]">
         <CartAmountToggle
-          quantity={quantity}
-          increaseQuantity={increaseQuantity}
-          decreaseQuantity={decreaseQuantity}
+          mQuantity={quantity}
+          handleQuantity={handleQuantityChange}
+          id={_id}
         />
-        <Button
-          size="medium"
-          sx={{
-            margin: "10px",
-            fontFamily: "inherit",
-            paddingInline: "55px",
+        <Link to={"/cart"}>
+          <Button
+            size="medium"
+            onClick={() => {
+              addToCart?.(
+                _id,
+                name,
+                quantity,
+                price,
+                selectedColor,
+                images[0],
+                availableQuantity,
+                selectedSize,
+              );
+            }}
+            sx={{
+              margin: "10px",
+              fontFamily: "inherit",
+              paddingInline: "55px",
 
-            fontWeight: "bold",
-            backgroundColor: "black",
-            color: "white",
-            borderColor: "#ff9900",
-            "&:hover": {
-              backgroundColor: "#ffaa00",
-              borderColor: "#ffaa00",
-            },
-          }}
-          className="whitespace-nowrap"
-        >
-          Add To Cart
-        </Button>
+              fontWeight: "bold",
+              backgroundColor: "black",
+              color: "white",
+              borderColor: "#ff9900",
+              "&:hover": {
+                backgroundColor: "#ffaa00",
+                borderColor: "#ffaa00",
+              },
+            }}
+            className="whitespace-nowrap"
+          >
+            Add To Cart
+          </Button>
+        </Link>
         <Button
           size="medium"
           className="whitespace-nowrap"

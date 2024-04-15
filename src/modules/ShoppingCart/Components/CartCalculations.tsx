@@ -1,6 +1,18 @@
 import { Button, TextField } from "@mui/material";
+import { useCartContext } from "../../../Context/CartContext";
+import { useState } from "react";
 
 const CartCalculations = () => {
+  const {
+    orderTotal,
+    subTotal,
+    shippingFee,
+    applyCoupon,
+    reductionValue,
+    appliedCouponValue,
+    couponApplied,
+  } = useCartContext();
+  const [couponValue, setCouponValue] = useState("");
   return (
     <div className="flex flex-col  md:flex-row w-full justify-center  ">
       <div className="flex lg:w-[60%] m-3 justify-center ">
@@ -11,6 +23,7 @@ const CartCalculations = () => {
             InputLabelProps={{
               shrink: false,
             }}
+            onChange={(e) => setCouponValue(e.target.value)}
             error
             sx={{
               "& .MuiInputBase-input": {
@@ -25,6 +38,7 @@ const CartCalculations = () => {
           <Button
             variant="contained"
             className="h-10 whitespace-nowrap "
+            onClick={() => applyCoupon?.(couponValue)}
             sx={{
               margin: "10px",
               paddingInline: "40px",
@@ -48,23 +62,31 @@ const CartCalculations = () => {
         <div className="font-bold text-3xl">Cart Totals</div>
         <div className="flex justify-between ">
           <h3 className="text-bold text-lg">Subtotal</h3>
-          <p className="text-bold text-lg">$431</p>
+          <p className="text-bold text-lg">${subTotal}</p>
         </div>
         <hr />
         <div className="flex justify-between ">
           <h3 className="text-bold text-sm">Shipping Fee</h3>
-          <div className="text-bold text-lg">$431</div>
+          <div className="text-bold text-lg">${shippingFee}</div>
         </div>
 
         <hr />
-        <div className="flex justify-between ">
-          <h3 className="text-bold text-sm">Reduction</h3>
-          <div className="text-bold text-lg">-$431</div>
+        <div className="flex flex-col justify-between ">
+          <div className="flex justify-between">
+            <h3 className="text-bold text-sm">Reduction</h3>
+            <div className="text-bold text-lg">-${reductionValue}</div>
+          </div>
+          {couponApplied ? (
+            <div>
+              <span className="text-green-500">Coupon Applied :</span>
+              <span>{appliedCouponValue}</span>
+            </div>
+          ) : null}
         </div>
         <hr />
         <div className="flex justify-between ">
           <h3 className="text-bold text-sm">Order Total</h3>
-          <div className="text-bold text-lg">$431</div>
+          <div className="text-bold text-lg">${orderTotal}</div>
         </div>
         <hr />
 

@@ -1,3 +1,4 @@
+import { useCartContext } from "../../Context/CartContext";
 import ProductsBanner from "../Products/components/ProductsBanner";
 import CartButtons from "./Components/CartButtons";
 import CartCalculations from "./Components/CartCalculations";
@@ -5,6 +6,8 @@ import CartItems from "./Components/CartItems";
 import CartMobileItems from "./Components/CartMobileItems";
 
 const ShoppingCart = () => {
+  const { cart } = useCartContext();
+
   return (
     <>
       <div className="w-full">
@@ -12,7 +15,7 @@ const ShoppingCart = () => {
       </div>
       <div className="flex-col w-[90%] mx-auto relative hidden md:flex">
         <div className="w-full my-4">
-          <CartItems />
+          <CartItems cart={cart} />
         </div>
         <div className="w-full my-4">
           <CartButtons />
@@ -23,7 +26,7 @@ const ShoppingCart = () => {
       </div>
       <div className="md:hidden flex-col">
         <div className="w-[90%] mx-auto my-4">
-          <CartMobileItems />
+          <CartMobileItems cart={cart} />
         </div>
         <div className="w-[90%] mx-auto my-4">
           <CartButtons />
