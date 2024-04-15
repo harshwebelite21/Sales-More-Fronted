@@ -103,6 +103,7 @@ export const ProductsContextProvider = ({
       }));
     }
   };
+
   const getFilteredValue = async (url: string) => {
     try {
       setState((prevState) => ({
@@ -127,6 +128,7 @@ export const ProductsContextProvider = ({
       }));
     }
   };
+
   const handleSort = async (order: string) => {
     try {
       setState((prevState) => ({

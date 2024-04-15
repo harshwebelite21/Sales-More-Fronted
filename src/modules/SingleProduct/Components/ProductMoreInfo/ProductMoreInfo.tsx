@@ -18,7 +18,7 @@ const ProductMoreInfo = ({
   const { description, attributes } = product;
   const [value, setValue] = useState("one");
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
@@ -68,16 +68,10 @@ const ProductMoreInfo = ({
           <TablesData attributes={attributes} />
         </div>
         <div className={`${value === "three" ? "" : "hidden"}`}>
-          {Object.keys(reviewData).length === 0 ? (
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <p className="text-gray-700">No Review Found For This Product</p>
-            </div>
-          ) : (
-            <ReviewData
-              reviewData={reviewData}
-              isReviewLoading={isReviewLoading}
-            />
-          )}
+          <ReviewData
+            reviewData={reviewData}
+            isReviewLoading={isReviewLoading}
+          />
         </div>
       </div>
     </div>

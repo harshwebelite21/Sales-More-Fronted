@@ -23,12 +23,18 @@ export const get = async <T = any>(
   });
 };
 
-export const post = async (
+export const post = async <T = any>(
   url: string,
   data: any,
-  config?: AxiosRequestConfig,
-): Promise<any> => {
-  return axiosInstance.post(url, data, config);
+  config?: { query?: T; token?: string },
+): Promise<T> => {
+  const { token, query } = config || {};
+
+  return axiosInstance.post(url, data, {
+    ...config,
+    headers: { ...(token ? { authorization: token } : {}) },
+    params: query,
+  });
 };
 
 export const put = async (
