@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import FilterSection from "./components/FilterSection";
-import ProductsBanner from "./components/ProductsBanner";
 import ProductsList from "./components/ProductsList";
 import SortSection from "./components/SortSection";
 import { useProductsContext } from "../../Context/ProductsContext";
+import Banner from "../../components/Banner";
 
 const Products = () => {
   useEffect(() => {
@@ -13,7 +13,7 @@ const Products = () => {
   const { filterProducts } = useProductsContext();
   return (
     <div>
-      <ProductsBanner />
+      <Banner section={"Products"} />
       <div className="flex gap-5 w-[90%] mx-auto flex-col md:flex-row">
         <div className="md:w-1/4">
           <FilterSection />

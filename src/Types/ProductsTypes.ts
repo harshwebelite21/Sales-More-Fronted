@@ -115,6 +115,8 @@ export interface CartContextType {
 export interface SendRequestContextType {
   isReviewAdded: boolean;
   addReview?: (data: ReviewData) => void;
+  isTicketAdded: boolean;
+  addTicket?: (data: TicketData) => void;
 }
 
 export interface ReviewData {
@@ -122,4 +124,11 @@ export interface ReviewData {
   userEmail: string;
   reviewText: string;
   rating: number;
+}
+
+export interface TicketData {
+  userName: string;
+  userEmail: string;
+  subject: string;
+  description: string;
 }

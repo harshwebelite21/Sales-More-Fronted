@@ -11,6 +11,7 @@ export default {
         sans: ["Poppins", "sans-serif"],
         baskerville: ["Libre Baskerville", "serif"],
         muli: ["Muli", "sans-serif"],
+        libre: ['"Libre Baskerville"', "serif"],
       },
     },
   },
