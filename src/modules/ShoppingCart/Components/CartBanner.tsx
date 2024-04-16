@@ -81,9 +81,27 @@ function StepIcon(props: Readonly<StepIconProps>) {
 const steps = ["Shopping Cart", "Checkout", "Order Complete"];
 
 export default function CartBanner() {
+  const segments = window.location.href.split("/");
+  const lastSegment = segments[segments.length - 1];
+  let activeState: number = 0;
+  switch (lastSegment) {
+    case "cart":
+      break;
+
+    case "checkout":
+      activeState = 1;
+      break;
+
+    default:
+  }
+
   return (
     <Stack sx={{ width: "100%" }} spacing={4} className="my-10">
-      <Stepper alternativeLabel activeStep={1} connector={<Connector />}>
+      <Stepper
+        alternativeLabel
+        activeStep={activeState}
+        connector={<Connector />}
+      >
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel StepIconComponent={StepIcon}>{label}</StepLabel>

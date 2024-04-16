@@ -163,23 +163,25 @@ const CartCalculations = () => {
               ) : null}
 
               <div className="w-full flex-center ">
-                <Button
-                  className="flex"
-                  size="medium"
-                  sx={{
-                    margin: "10px",
-                    fontWeight: "bold",
-                    backgroundColor: "#097F1E",
-                    color: "white",
-                    borderColor: "#ff9900",
-                    "&:hover": {
+                <Link to="/cart/checkout">
+                  <Button
+                    className="flex"
+                    size="medium"
+                    sx={{
+                      margin: "10px",
+                      fontWeight: "bold",
                       backgroundColor: "#097F1E",
-                      borderColor: "#ffaa00",
-                    },
-                  }}
-                >
-                  Proceed To Buy
-                </Button>
+                      color: "white",
+                      borderColor: "#ff9900",
+                      "&:hover": {
+                        backgroundColor: "#097F1E",
+                        borderColor: "#ffaa00",
+                      },
+                    }}
+                  >
+                    Proceed To Checkout
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
