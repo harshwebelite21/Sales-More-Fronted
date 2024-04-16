@@ -5,7 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useSendRequestContext } from "../../../Context/SendRequestContext";
 
 const FormSection = () => {
-  const { addTicket } = useSendRequestContext();
+  const { addTicket, isTicketAdded } = useSendRequestContext();
   const schema = object().shape({
     userName: string()
       .min(5)
@@ -36,36 +36,80 @@ const FormSection = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit((data) => addTicket?.(data))}>
-        <div className="flex flex-col gap-5">
-          <div className="flex gap-5 w-full">
-            <div className="w-[50%]">
+      {isTicketAdded ? (
+        <div className="text-center p-5 font-semibold text-lg">
+          Your ticket has been successfully submitted!
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit((data) => addTicket?.(data))}>
+          <div className="flex flex-col gap-5">
+            <div className="flex gap-5 w-full">
+              <div className="w-[50%]">
+                <Controller
+                  control={control}
+                  name="userName"
+                  render={({ field }) => (
+                    <TextField
+                      className="w-full"
+                      placeholder="Your Name"
+                      error={!!errors.userName}
+                      helperText={
+                        errors.userName ? errors.userName.message : ""
+                      }
+                      {...field}
+                      {...register}
+                    />
+                  )}
+                />
+              </div>
+              <div className="w-[50%]">
+                <Controller
+                  control={control}
+                  name="userEmail"
+                  render={({ field }) => (
+                    <TextField
+                      className="w-full"
+                      placeholder="Your Email"
+                      error={!!errors.userEmail}
+                      helperText={
+                        errors.userEmail ? errors.userEmail.message : ""
+                      }
+                      {...field}
+                      {...register}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+            <div className="">
               <Controller
                 control={control}
-                name="userName"
+                name="subject"
                 render={({ field }) => (
                   <TextField
                     className="w-full"
-                    placeholder="Your Name"
-                    error={!!errors.userName}
-                    helperText={errors.userName ? errors.userName.message : ""}
+                    placeholder="Subject"
+                    error={!!errors.subject}
+                    helperText={errors.subject ? errors.subject.message : ""}
                     {...field}
                     {...register}
                   />
                 )}
               />
             </div>
-            <div className="w-[50%]">
+            <div className="">
               <Controller
                 control={control}
-                name="userEmail"
+                name="description"
                 render={({ field }) => (
                   <TextField
-                    className="w-full"
-                    placeholder="Your Email"
-                    error={!!errors.userEmail}
+                    className="w-full h-full"
+                    placeholder="Message"
+                    rows={5}
+                    multiline={true}
+                    error={!!errors.description}
                     helperText={
-                      errors.userEmail ? errors.userEmail.message : ""
+                      errors.description ? errors.description.message : ""
                     }
                     {...field}
                     {...register}
@@ -73,50 +117,14 @@ const FormSection = () => {
                 )}
               />
             </div>
+            <div className="">
+              <Button variant="contained" type="submit">
+                Submit
+              </Button>
+            </div>
           </div>
-          <div className="">
-            <Controller
-              control={control}
-              name="subject"
-              render={({ field }) => (
-                <TextField
-                  className="w-full"
-                  placeholder="Subject"
-                  error={!!errors.subject}
-                  helperText={errors.subject ? errors.subject.message : ""}
-                  {...field}
-                  {...register}
-                />
-              )}
-            />
-          </div>
-          <div className="">
-            <Controller
-              control={control}
-              name="description"
-              render={({ field }) => (
-                <TextField
-                  className="w-full h-full"
-                  placeholder="Message"
-                  rows={5}
-                  multiline={true}
-                  error={!!errors.description}
-                  helperText={
-                    errors.description ? errors.description.message : ""
-                  }
-                  {...field}
-                  {...register}
-                />
-              )}
-            />
-          </div>
-          <div className="">
-            <Button variant="contained" type="submit">
-              Submit
-            </Button>
-          </div>
-        </div>
-      </form>
+        </form>
+      )}
     </div>
   );
 };
