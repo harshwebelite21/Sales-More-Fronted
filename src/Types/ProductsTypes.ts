@@ -111,3 +111,15 @@ export interface CartContextType {
   reductionValue: number;
   removeCoupon?: (coupon: string) => void;
 }
+
+export interface SendRequestContextType {
+  isReviewAdded: boolean;
+  addReview?: (data: ReviewData) => void;
+}
+
+export interface ReviewData {
+  userName: string;
+  userEmail: string;
+  reviewText: string;
+  rating: number;
+}

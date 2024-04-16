@@ -5,11 +5,18 @@ import PropTypes from "prop-types";
 const RatingStars = ({
   readOnly,
   stars,
+  onStarChange,
 }: {
   readOnly: boolean;
   stars: number;
+  onStarChange: (newValue: number) => void;
 }) => {
-  const [value, setValue] = useState<number | null>(stars);
+  const [value, setValue] = useState<number>(stars);
+
+  const handleStarChange = (newValue: number) => {
+    setValue(newValue);
+    onStarChange(newValue);
+  };
 
   return (
     <Box>
@@ -17,9 +24,8 @@ const RatingStars = ({
         value={value}
         name="half-rating"
         defaultValue={0}
-        precision={0.5}
-        onChange={(event, newValue) => {
-          setValue(newValue);
+        onChange={(_event, newValue) => {
+          handleStarChange(newValue!);
         }}
         readOnly={readOnly}
       />
