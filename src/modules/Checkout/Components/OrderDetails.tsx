@@ -10,7 +10,6 @@ import { useState } from "react";
 const OrderDetails = () => {
   const { cart, orderTotal } = useCartContext();
   const [addConfirmed, setAddConfirmed] = useState(false);
-
   const { addPayment } = usePaymentContext();
 
   const schema = object().shape({
@@ -28,6 +27,7 @@ const OrderDetails = () => {
     pinCode: number().required(),
     mobileNo: number().required(),
     notes: string().required(),
+    orderTotal: number().required(),
     cartItems: array()
       .required()
       .of(
@@ -58,15 +58,20 @@ const OrderDetails = () => {
       userName: "",
       userEmail: "",
       country: "",
+      state: "",
       address: "",
       notes: "",
       cartItems: [],
+      orderTotal,
+      pinCode: 0,
+      mobileNo: 0,
     },
     resolver: yupResolver(schema),
   });
 
   const handleOrder = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    setValue("orderTotal", orderTotal);
     const data = getValues();
     addPayment?.(data);
   };
@@ -163,6 +168,7 @@ const OrderDetails = () => {
                       <TextField
                         className="w-full"
                         placeholder="Pin Code"
+                        type="number"
                         {...field}
                         {...register}
                         error={!!errors.pinCode}
@@ -201,6 +207,7 @@ const OrderDetails = () => {
                     render={({ field }) => (
                       <TextField
                         className="w-full"
+                        type="number"
                         placeholder="Mobile No"
                         {...field}
                         {...register}

@@ -8,6 +8,7 @@ import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
+import PropTypes from "prop-types";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { StepIconProps } from "@mui/material/StepIcon";
@@ -79,22 +80,13 @@ function StepIcon(props: Readonly<StepIconProps>) {
 }
 
 const steps = ["Shopping Cart", "Checkout", "Order Complete"];
+CartBanner.propTypes = {
+  activeState: PropTypes.number.isRequired,
+};
 
-export default function CartBanner() {
-  const segments = window.location.href.split("/");
-  const lastSegment = segments[segments.length - 1];
-  let activeState: number = 0;
-  switch (lastSegment) {
-    case "cart":
-      break;
-
-    case "checkout":
-      activeState = 1;
-      break;
-
-    default:
-  }
-
+export default function CartBanner({
+  activeState,
+}: Readonly<{ activeState: number }>) {
   return (
     <Stack sx={{ width: "100%" }} spacing={4} className="my-10">
       <Stepper

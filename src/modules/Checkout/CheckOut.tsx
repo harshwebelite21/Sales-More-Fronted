@@ -1,13 +1,18 @@
 import CartBanner from "../ShoppingCart/Components/CartBanner";
 import OrderDetails from "./Components/OrderDetails";
+import PropTypes from "prop-types";
 
-const CheckOut = () => {
+const CheckOut = ({ activeState }: { activeState: number }) => {
   return (
     <div>
-      <CartBanner />
+      <CartBanner activeState={activeState} />
       <OrderDetails />
     </div>
   );
+};
+
+CheckOut.propTypes = {
+  activeState: PropTypes.number.isRequired,
 };
 
 export default CheckOut;

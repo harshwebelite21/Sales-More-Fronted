@@ -19,9 +19,15 @@ const App = () => {
         <Route path="about" element={<AboutSection />} />
         <Route path="products" element={<Products />} />
         <Route path="/products/:id" element={<SingleProduct />} />
-        <Route path="/cart" element={<ShoppingCart />} />
+        <Route
+          path="/cart"
+          element={<ShoppingCart activeState={0 as number} />}
+        />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/cart/checkout" element={<CheckOut />} />
+        <Route
+          path="/cart/checkout"
+          element={<CheckOut activeState={1 as number} />}
+        />
       </Routes>
       <Footer />
     </>

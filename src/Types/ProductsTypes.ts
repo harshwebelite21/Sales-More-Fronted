@@ -142,10 +142,15 @@ export interface PaymentDetails {
   pinCode: number;
   mobileNo: number;
   notes: string;
+  orderTotal: number;
   cartItems: CartItemType[];
 }
 
+export interface PaymentStructure {
+  id: string;
+  cart: PaymentDetails;
+}
 export interface PaymentContextType {
-  paymentInfo: PaymentDetails[];
-  addPayment?: (data: PaymentDetails) => void;
+  paymentInfo: PaymentStructure[];
+  addPayment?: (pData: PaymentDetails) => Promise<void>;
 }
