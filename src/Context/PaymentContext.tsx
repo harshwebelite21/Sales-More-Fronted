@@ -28,6 +28,8 @@ export const PaymentContextProvider = ({
 
     const orderIds = uuid();
 
+    pData = { ...pData, time: new Date() };
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { cartItems: _items, ...formData } = pData;
 
@@ -81,10 +83,16 @@ export const PaymentContextProvider = ({
 
     setUState((prevState) => ({
       ...prevState,
-      paymentInfo: [...prevState.paymentInfo, { id: orderId, cart: pData }],
+      paymentInfo: [
+        ...prevState.paymentInfo,
+        { id: orderId, cart: pData, order_Id: id },
+      ],
     }));
   };
 
+  const getPaymentDetails = (pId: string) => {
+    return uState.paymentInfo.find((payment) => payment.order_Id === pId);
+  };
   useEffect(() => {
     localStorage.setItem("PaymentState", JSON.stringify(uState));
   }, [uState]);
@@ -95,6 +103,7 @@ export const PaymentContextProvider = ({
     return {
       paymentInfo,
       addPayment,
+      getPaymentDetails,
     };
   }, [uState]);
 
