@@ -3,15 +3,16 @@ import CartBanner from "./Components/CartBanner";
 import CartCalculations from "./Components/CartCalculations";
 import CartItems from "./Components/CartItems";
 import CartMobileItems from "./Components/CartMobileItems";
+import PropTypes from "prop-types";
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ activeState }: { activeState: number }) => {
   const { cart } = useCartContext();
 
   return (
     <>
       <div className="flex-col w-[90%] mx-auto relative hidden md:flex">
         <div className="w-full  h-auto">
-          <CartBanner />
+          <CartBanner activeState={activeState} />
         </div>
         <hr />
         <div className="w-full my-4 h-auto max-h-[500px] overflow-y-auto">
@@ -25,7 +26,7 @@ const ShoppingCart = () => {
       </div>
       <div className="md:hidden flex-col">
         <div className="w-[90%] mx-auto my-4">
-          <CartBanner />
+          <CartBanner activeState={activeState} />
         </div>
         <div className="w-[90%] mx-auto my-4">
           <CartMobileItems cart={cart} />
@@ -36,6 +37,10 @@ const ShoppingCart = () => {
       </div>
     </>
   );
+};
+
+ShoppingCart.propTypes = {
+  activeState: PropTypes.number.isRequired,
 };
 
 export default ShoppingCart;

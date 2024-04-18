@@ -12,6 +12,7 @@ import { FaCircle, FaTrash } from "react-icons/fa";
 import CartAmountToggle from "../../SingleProduct/Components/ProductView/components/CartAmountToggle";
 import { CartItemType } from "../../../Types/ProductsTypes";
 import { useCartContext } from "../../../Context/CartContext";
+import { Link } from "react-router-dom";
 
 const CartMobileItems = ({ cart }: { cart: CartItemType[] }) => {
   const handleQuantityChange = () => {};
@@ -20,25 +21,27 @@ const CartMobileItems = ({ cart }: { cart: CartItemType[] }) => {
 
   return (
     <div className="rounded-md flex flex-col gap-3">
-      <Button
-        variant="outlined"
-        size="medium"
-        className="h-10 bg-[#ff9900]"
-        sx={{
-          paddingInline: "35px",
-          backgroundColor: "#ff9900",
-          borderColor: "#ff9900",
-          color: "black",
-          fontFamily: "inherit",
-          fontWeight: "bold",
-          "&:hover": {
-            backgroundColor: "#ffaa00",
-            borderColor: "#ffaa00",
-          },
-        }}
-      >
-        Proceed To Buy
-      </Button>
+      <Link to="/cart/checkout">
+        <Button
+          variant="outlined"
+          size="medium"
+          className="h-10 bg-[#ff9900]"
+          sx={{
+            paddingInline: "35px",
+            backgroundColor: "#ff9900",
+            borderColor: "#ff9900",
+            color: "black",
+            fontFamily: "inherit",
+            fontWeight: "bold",
+            "&:hover": {
+              backgroundColor: "#ffaa00",
+              borderColor: "#ffaa00",
+            },
+          }}
+        >
+          Proceed To CheckOut
+        </Button>
+      </Link>
       <hr className="border-t-2" />
       {cart.map((product: CartItemType) => (
         <Card key={product.id} sx={{ backgroundColor: "#f2f2f5" }}>

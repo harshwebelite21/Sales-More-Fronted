@@ -83,7 +83,7 @@ export interface CartItemType {
   image: string;
   availableQuantity: number;
   size: string;
-  subTotal?: number;
+  subTotal: number;
 }
 export interface CartContextType {
   cart: CartItemType[];
@@ -131,4 +131,26 @@ export interface TicketData {
   userEmail: string;
   subject: string;
   description: string;
+}
+
+export interface PaymentDetails {
+  userName: string;
+  userEmail: string;
+  country: string;
+  address: string;
+  state: string;
+  pinCode: number;
+  mobileNo: number;
+  notes: string;
+  orderTotal: number;
+  cartItems: CartItemType[];
+}
+
+export interface PaymentStructure {
+  id: string;
+  cart: PaymentDetails;
+}
+export interface PaymentContextType {
+  paymentInfo: PaymentStructure[];
+  addPayment?: (pData: PaymentDetails) => Promise<void>;
 }
