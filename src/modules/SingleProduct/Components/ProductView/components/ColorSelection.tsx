@@ -8,7 +8,7 @@ const ColorSelection = ({
   colors: string[];
   onColorChange: (color: string) => void;
 }) => {
-  const [selectedColor, setSelectedColor] = useState(colors?.at(0));
+  const [selectedColor, setSelectedColor] = useState(colors?.[0]);
 
   const handleClick = (color: string) => {
     setSelectedColor(color);

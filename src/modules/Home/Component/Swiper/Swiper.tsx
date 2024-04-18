@@ -49,7 +49,7 @@ const MySwiper = () => {
               <Link to={`/products/${product._id}`} className="cursor-pointer">
                 <div className="relative">
                   <img
-                    src={product?.images?.at(0)}
+                    src={product?.images?.[0]}
                     alt={product.name}
                     className=" border-2 rounded-[20px] h-[250px] w-[425px]  object-fit"
                   />

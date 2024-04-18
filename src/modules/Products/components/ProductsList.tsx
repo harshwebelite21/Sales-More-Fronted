@@ -23,7 +23,7 @@ const ProductsList = ({ products }: { products: Product[] }) => {
                   className="border p-4 rounded-lg"
                 >
                   <img
-                    src={product?.images?.at(0)}
+                    src={product?.images?.[0]}
                     alt={product.name}
                     className="w-full h-48 object-cover rounded-lg mb-2"
                   />
@@ -54,7 +54,7 @@ const ProductsList = ({ products }: { products: Product[] }) => {
                 >
                   <div className="w-1/3">
                     <img
-                      src={product?.images?.at(0)}
+                      src={product?.images?.[0]}
                       alt={product.name}
                       className="rounded-xl w-full h-[230px] object-cover"
                     />

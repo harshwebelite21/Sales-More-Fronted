@@ -6,7 +6,7 @@ const SizeSelection = ({
   sizes: string[];
   handleSizeSelection: (size: string) => void;
 }) => {
-  const [selectedSize, setSelectedSize] = useState(sizes?.at(0));
+  const [selectedSize, setSelectedSize] = useState(sizes?.[0]);
 
   const handleClick = (size: string) => {
     setSelectedSize(size);

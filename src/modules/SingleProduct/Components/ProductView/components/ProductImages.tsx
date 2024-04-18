@@ -10,7 +10,7 @@ const ProductImages = ({
   product: Product;
   isSingleLoading: boolean;
 }) => {
-  const [selectedImage, setSelectedImage] = useState(product?.images?.at(0));
+  const [selectedImage, setSelectedImage] = useState(product?.images?.[0]);
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);

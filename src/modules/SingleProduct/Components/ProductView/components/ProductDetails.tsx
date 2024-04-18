@@ -35,7 +35,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
   let selectedSize: string;
 
   const [selectedColor, setSelectedColor] = useState<string>(
-    colors?.at(0) as string,
+    colors?.[0] as string,
   );
 
   const onStarChange = () => {};
