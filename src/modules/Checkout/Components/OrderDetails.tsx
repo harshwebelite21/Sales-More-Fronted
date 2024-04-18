@@ -168,6 +168,7 @@ const OrderDetails = () => {
                       <TextField
                         className="w-full"
                         placeholder="Pin Code"
+                        label="Pin Code"
                         type="number"
                         {...field}
                         {...register}
@@ -192,6 +193,7 @@ const OrderDetails = () => {
                         placeholder="Your Email"
                         {...field}
                         {...register}
+                        label="Mobile No"
                         error={!!errors.userEmail}
                         helperText={
                           errors.userEmail ? errors.userEmail.message : ""

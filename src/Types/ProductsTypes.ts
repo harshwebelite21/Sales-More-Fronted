@@ -144,13 +144,16 @@ export interface PaymentDetails {
   notes: string;
   orderTotal: number;
   cartItems: CartItemType[];
+  time?: Date;
 }
 
 export interface PaymentStructure {
   id: string;
   cart: PaymentDetails;
+  order_Id: string;
 }
 export interface PaymentContextType {
   paymentInfo: PaymentStructure[];
   addPayment?: (pData: PaymentDetails) => Promise<void>;
+  getPaymentDetails?: (pId: string) => PaymentStructure | undefined;
 }
