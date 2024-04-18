@@ -38,6 +38,8 @@ const ProductDetails = ({ product }: { product: Product }) => {
     colors?.at(0) as string,
   );
 
+  const onStarChange = () => {};
+
   const handleSizeSelection = (size: string) => {
     selectedSize = size;
   };
@@ -53,7 +55,11 @@ const ProductDetails = ({ product }: { product: Product }) => {
       <div className="text-4xl font-sans">{name}</div>
       <div className="text-lg text-[#9F9F9F] font-sans">Rs. {price}</div>
       <div className="icon-style flex items-center">
-        <RatingStars readOnly={true} stars={stars} />
+        <RatingStars
+          readOnly={true}
+          stars={stars}
+          onStarChange={onStarChange}
+        />
         <p className="mx-5 text-[#9F9F9F] border-1-">|</p>
         <p className="text-[#9F9F9F]">{stars} customer reviews</p>
       </div>

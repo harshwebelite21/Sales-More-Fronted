@@ -6,6 +6,8 @@ import RatingStars from "../../../components/RatingStars";
 
 const ProductsList = ({ products }: { products: Product[] }) => {
   const { gridViewType } = useProductsContext();
+
+  const onStarChange = () => {};
   return (
     <>
       {Object.keys(products).length <= 0 ? (
@@ -65,7 +67,11 @@ const ProductsList = ({ products }: { products: Product[] }) => {
                       <p className="text-sm text-gray-600 line-clamp-2">
                         {product.description}
                       </p>
-                      <RatingStars readOnly={true} stars={product.stars} />
+                      <RatingStars
+                        readOnly={true}
+                        stars={product.stars}
+                        onStarChange={onStarChange}
+                      />
                       <div>
                         <span>Company : </span>
                         <span>{product.company}</span>
