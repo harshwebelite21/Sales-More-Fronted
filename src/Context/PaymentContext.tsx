@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { PaymentContextType, PaymentDetails } from "../Types/ProductsTypes";
 import { get, post } from "../utils/axios";
 import { v4 as uuid } from "uuid";
+import appConfig from "../config/appConfig";
 
 const defaultState: PaymentContextType = {
   paymentInfo: [],
@@ -24,7 +25,7 @@ export const PaymentContextProvider = ({
   const addPayment = async (pData: PaymentDetails) => {
     const {
       data: { key },
-    } = await get("http://localhost:4000/api/getkey");
+    } = await get("get-key", { token: appConfig.authToken });
 
     const orderIds = uuid();
 
@@ -40,7 +41,9 @@ export const PaymentContextProvider = ({
 
     const {
       data: { order },
-    } = await post("http://localhost:4000/api/checkout", payload);
+    } = await post("/checkout", payload, {
+      token: appConfig.authToken,
+    });
 
     const { notes, id } = order;
     const {
@@ -62,7 +65,7 @@ export const PaymentContextProvider = ({
       description: { note },
       image: "https://lessonpix.com/drawings/96333/380x380/Lap.png",
       order_id: id,
-      callback_url: "http://localhost:4000/api/paymentverification",
+      callback_url: "http://localhost:3000/payment-verification",
       prefill: {
         name: { userName },
         email: { userEmail },
